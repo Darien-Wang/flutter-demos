@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_component_feature_a:
+    path: ../flutter_component_feature_a
+  flutter_component_feature_b:
+    path: ../flutter_component_feature_b
 
 dev_dependencies:
   flutter_test:

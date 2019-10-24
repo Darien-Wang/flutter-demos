@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/page/CounterPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/CounterBloc.dart';
-import '../EnumFile.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // ignore: close_sinks
-//    CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Counter')),
