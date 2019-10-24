@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_app/page/CounterPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/CounterBloc.dart';
+import '../EnumFile.dart';
 
-import 'counter_bloc.dart';
-
-class CounterPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
+    // ignore: close_sinks
+//    CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Counter')),
@@ -28,21 +29,18 @@ class CounterPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.0),
             child: FloatingActionButton(
-              child: Icon(Icons.add),
+              heroTag: "one",
+              child: Icon(Icons.navigate_next),
               onPressed: () {
-                counterBloc.add(CounterEvent.increment);
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => BlocProvider.value(
+                    value: BlocProvider.of<CounterBloc>(context),
+                    child: CounterPage(),
+                  ),
+                ));
               },
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0),
-            child: FloatingActionButton(
-              child: Icon(Icons.remove),
-              onPressed: () {
-                counterBloc.add(CounterEvent.decrement);
-              },
-            ),
-          ),
+          )
         ],
       ),
     );
