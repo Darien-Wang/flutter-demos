@@ -33,7 +33,8 @@ class MyHomePage extends StatelessWidget {
     return RaisedButton(
       child: Text('启动页面'),
       onPressed: () {
-        Navigator.of(context).pushNamed("/featurea/pagea");
+        Navigator.of(context).pushNamed(
+            "/featurea/pagea", arguments: "你好，pageA");
       },
     );
   }
