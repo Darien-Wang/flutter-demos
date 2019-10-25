@@ -17,7 +17,12 @@ class FeatureAPage extends StatelessWidget {
         child: RaisedButton(
           child: Text('Feature A页面，点击打开FeatureB页面 \n $args'),
           onPressed: () {
-            ConnectedNavigator.pushNamed(context, RouteName.FEATURE_B_PAGE_B);
+            //这里标注了打开一个页面，并且处理那个页面的返回值
+            ConnectedNavigator.pushNamed(
+                context, RouteName.FEATURE_B_PAGE_B)
+                .then((value) {
+              print('哈哈哈，我收到了B页面的恢复，内容是：\n$value');
+            });
           },
         ),
       ),
