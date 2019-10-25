@@ -1,8 +1,6 @@
-import '../EnumFile.dart';
 import 'package:bloc/bloc.dart';
 
 class CounterBloc extends Bloc<CounterEvent, int> {
-
   @override
   int get initialState => 0;
 
@@ -17,4 +15,9 @@ class CounterBloc extends Bloc<CounterEvent, int> {
         break;
     }
   }
+}
+
+enum CounterEvent {
+  increment,
+  decrement,
 }

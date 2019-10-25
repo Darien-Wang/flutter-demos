@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/CounterBloc.dart';
-import '../EnumFile.dart';
 
 class CounterPage extends StatelessWidget {
   @override
