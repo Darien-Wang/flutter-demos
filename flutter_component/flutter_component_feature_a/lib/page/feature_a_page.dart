@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_component_router/flutter_component_router.dart';
+import 'package:flutter_component_router_name/flutter_component_router_name.dart';
 
 class FeatureAPage extends StatelessWidget {
   @override
@@ -15,7 +17,7 @@ class FeatureAPage extends StatelessWidget {
         child: RaisedButton(
           child: Text('Feature A页面，点击打开FeatureB页面 \n $args'),
           onPressed: () {
-            Navigator.of(context).pushNamed("/featureb/pageb");
+            ConnectedNavigator.pushNamed(context, RouteName.FEATURE_B_PAGE_B);
           },
         ),
       ),

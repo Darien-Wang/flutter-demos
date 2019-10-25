@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_component_router/flutter_component_router.dart';
+import 'package:flutter_component_router_name/flutter_component_router_name.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,8 +34,10 @@ class MyHomePage extends StatelessWidget {
     return RaisedButton(
       child: Text('启动页面'),
       onPressed: () {
-        Navigator.of(context).pushNamed(
-            "/featurea/pagea", arguments: "你好，pageA");
+        ConnectedNavigator.pushNamed(context, RouteName.FEATURE_A_PAGE_A,
+            arguments: "你好，Page A，我是HOME PAGE");
+        Navigator.of(context)
+            .pushNamed("/featurea/pagea", arguments: "你好，pageA");
       },
     );
   }

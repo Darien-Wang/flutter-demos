@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_component_router:
+    path: ../flutter_component_router
+  flutter_component_router_name:
+    path: ../flutter_component_router_name
 
 dev_dependencies:
   flutter_test:

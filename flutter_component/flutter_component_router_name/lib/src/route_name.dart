@@ -1,0 +1,1 @@
+enum RouteName { FEATURE_A_PAGE_A, FEATURE_B_PAGE_B }
