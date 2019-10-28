@@ -26,10 +26,10 @@ class ConnectedNavigator {
     return Navigator.of(context).pushNamed(routeName);
   }
 
-  ///@param routeName defined in [RouteName]
   static Future<T> pushFeatureAPageA<T extends Object>(BuildContext context,
-      String routeName, String arguments) {
-    return Navigator.of(context).pushNamed(routeName, arguments: arguments);
+      String arguments) {
+    return Navigator.of(context)
+        .pushNamed(RouteName.FEATURE_A_PAGE_A, arguments: arguments);
   }
 }
 

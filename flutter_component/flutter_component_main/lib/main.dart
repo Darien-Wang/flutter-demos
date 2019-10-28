@@ -26,8 +26,7 @@ class MyHomePage extends StatelessWidget {
     return RaisedButton(
       child: Text('启动页面'),
       onPressed: () {
-        ConnectedNavigator.pushFeatureAPageA(
-            context, RouteName.FEATURE_A_PAGE_A, "你好，Page A，我是HOME PAGE");
+        ConnectedNavigator.pushFeatureAPageA(context, "你好，Page A，我是HOME PAGE");
       },
     );
   }
