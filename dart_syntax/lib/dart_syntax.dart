@@ -250,6 +250,7 @@ class ClassDemoImpl implements ClassDemo {
  * Dart中restrict一个泛型，只能使用extends（表示接受特定类型及其子类的类型作为泛型约定），不能使用super
  * 泛型针对class和method，由于泛型在Dart带入运行时，泛型可以直接用于一个变量的所有操作
  * 泛型method不可以脱离泛型类，也就是只能在泛型类内定义泛型method,泛型方法。泛型方法不能是static的。
+ *
  */
 
 class GenericDemo<T extends num> {
@@ -258,6 +259,25 @@ class GenericDemo<T extends num> {
     return t;
   }
 }
+
+/**
+ *  Library and visibility
+ *
+ *  每一个dart app都是一个library，即便不是显著的标明为一个Library
+ *  以下划线开头命名的identifiers，只在当前Library可见
+ *
+ *  使用import来引入一个library，
+ *  对于dart的内置库使用'dart:xxx'来引入
+ *  对于外置的库使用：'package:xxx'来引入
+ *  可以给一个库设置前缀，import 'package:xxx' as yyy
+ *  可以部分引入一个库，import 'package:xxx' show xxxy或者hide xxxz
+ *
+ *
+ *  对于flutter而言：包有两种：
+ *  1，dart package。这种包里面只有dart的代码
+ *  2，flutter plugin，这种包还包含native端的代码
+ *
+ */
 
 
 
