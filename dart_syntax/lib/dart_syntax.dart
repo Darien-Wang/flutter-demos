@@ -276,7 +276,7 @@ class GenericDemo<T extends num> {
  *  对于flutter而言：包有两种：
  *  1，dart package。这种包里面只有dart的代码
  *  2，flutter plugin，这种包还包含native端的代码
- *
+ *  3, 还有一种flutter module用于混合项目的开发，但是这个不适合我们的项目，没怎么看过。
  */
 
 
