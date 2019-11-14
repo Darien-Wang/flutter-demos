@@ -70,6 +70,10 @@ class TheVariable {
  * named params包裹在大括号内声明：void enableFlags({bool bold, bool hidden}) {...}，可以是使用@required来要求必须传递的named param
  * positional params包裹在中括号声明：String say(String from, String msg, [String device]){}
  * 对于可选参数，可以使用=来定义默认值，否则默认值是null，
+ *
+ * Instance methods，属于绑定对象的函数，可以通过this访问，
+ *
+ * getters和setter是特殊的函数，用于提供read和write的控制，每个instance field包含隐式的getter and|or setter，
  */
 
 ///main函数："https://dart.dev/guides/language/language-tour#the-main-function"
@@ -128,38 +132,46 @@ class TheVariable {
  * finally用于无论异常是否发生，都要执行的代码块，类似于java，在finally中使用return语句可以刷新函数的返回（仅用于只是探讨，不建议finally做return）
  */
 
+
 ///Class
-/// Dart is an object-oriented language with classes and mixin-based inheritance,Every object is an instance of a class, and all classes descend from Object. Mixin-based inheritance means that although every class (except for Object) has exactly one superclass, a class body can be reused in multiple class hierarchies.
-/// 注意，针对对象的属性访问，建议使用?.操作符，可以避免null的问题
-///
-/// 构造函数：
-/// 包含默认的构造函数（使用类名，空参），构造函数同样可以包含可选参数，也就是包含named和positional参数。
-/// 如果定义了构造函数，即便是一个NamedConstructor，则不再提供默认的空参构造函数。
-/// 可以声明const构造函数，这要求类的instance variable都是final的,
-/// 只有声明了const构造函数的情况下，才可以在调用的时候声明const reference或者const value，这样在做==比对的时候返回true，如果只是普通调用，则在运行时生成普通的instance对象。
-/// 声明了const构造函数的，必须在NamedConstructor中给final字段赋值
-/// 默认而言，构造函数调用父类unnamed,no-argument构造函数（如果父类没有这个构造函数，子类必须手动的指定调用父类特定的构造函数），如果包含 initializer list则il最先执行，顺序是：
-/// 1 initializer list(这个可以用于NamedConstructor或者常规的,在构造函数的参数之后，用：分隔，赋值语句用逗号分隔，位于function body的大括号前面，如果没有function body使用分号结束)
-/// 2 superclass’s no-arg constructor
-/// 3 main class’s no-arg constructor
-///
-///
-/// 属性：
-/// 所有的field都包含隐式的getter，如果可以的也包含setter，我们可以使用关键词set和get来定义property，语法是：
-/// returnType get propertyName {function body}
-/// set propertyName(oneParam){function body}这里强调，set要求只能有一个参数
-///
-/// 抽象函数：
-/// 抽象的函数必须存在于抽象类
-/// getter和setter也可以是抽象的，
-///
-/// 隐式接口：
-/// 所有的类都是一个接口，可以被implement，这种情况下，类定义的所有instance method都要求重写(包含只有getter或者setter的property)
-///
-/// Extend：Dart支持单继承结构，在重写的情况下，如果要narrow函数的参数或者instance variable，可以使用关键词covariant表示协变
-///
-///
-///
+// ignore: slash_for_doc_comments
+/**
+ * Dart is an object-oriented language with classes and mixin-based inheritance,Every object is an instance of a class, and all classes descend from Object. Mixin-based inheritance means that although every class (except for Object) has exactly one superclass, a class body can be reused in multiple class hierarchies.
+ * 注意，针对对象的属性访问，建议使用?.操作符，可以避免null的问题
+ *
+ * 构造函数：
+ * 包含默认的构造函数（使用类名，空参），构造函数同样可以包含可选参数，也就是包含named和positional参数。
+ * 如果定义了构造函数，即便是一个NamedConstructor，则不再提供默认的空参构造函数。
+ * 可以声明const构造函数，这要求类的instance variable都是final的,
+ * 只有声明了const构造函数的情况下，才可以在调用的时候声明const reference或者const value，这样在做==比对的时候返回true，如果只是普通调用，则在运行时生成普通的instance对象。
+ * 声明了const构造函数的，必须在NamedConstructor中给final字段赋值
+ * 默认而言，构造函数调用父类unnamed,no-argument构造函数（如果父类没有这个构造函数，子类必须手动的指定调用父类特定的构造函数），如果包含 initializer list则il最先执行，顺序是：
+ * 1 initializer list(这个可以用于NamedConstructor或者常规的,在构造函数的参数之后，用：分隔，赋值语句用逗号分隔，位于function body的大括号前面，如果没有function body使用分号结束，通常用于给final field赋值，也可以在开发期间用assert语句排除非法输入)
+ * 2 superclass’s no-arg constructor
+ * 3 main class’s no-arg constructor
+ *
+ * NamedConstructor构造函数可以使用:this(params)重定向到本类常规的构造函数。这时候要求不能有function body
+ *
+ * Factory Constructor，可以使用factory关键词，函数名是类名(所以不能和常规的构造函数共存)，这种构造函数，可以在function body使用return语句，通常用于控制返回子类，或者单例等等。
+ *
+ *
+ *
+ * 属性：
+ * 所有的field都包含隐式的getter，如果可以的也包含setter，我们可以使用关键词set和get来定义property，语法是：
+ * returnType get propertyName {function body}
+ * set propertyName(oneParam){function body}这里强调，set要求只能有一个参数
+ *
+ * 抽象函数：
+ * 抽象的函数必须存在于抽象类
+ * getter和setter也可以是抽象的，
+ *
+ * 隐式接口：
+ * 所有的类都是一个接口，可以被implement，这种情况下，类定义的所有instance method都要求重写(包含只有getter或者setter的property)
+ *
+ * Extend：Dart支持单继承结构，在重写的情况下，如果要narrow函数的参数或者instance variable，可以使用关键词covariant表示协变
+ *
+ *
+ */
 
 abstract class ClassDemo {
   final String name;
@@ -203,37 +215,49 @@ class ClassDemoImpl implements ClassDemo {
   }
 }
 
+// ignore: slash_for_doc_comments
+/**
+ * 枚举：special kind of class used to represent a fixed number of constant values.
+ *
+ * 不同于java，Dart的枚举无法使用带有参数的构造函数，无法定义method
+ * 枚举不能被集成，mixin，
+ */
+
+/**
+ * mixin语法：
+ * mixin用于向class添加feature，它提供了介于extend和implements的一种实现
+ *
+ * 在之前的dart版本中，用于mixin的class通常声明为abstract的，但是新的dart语法中，应该用mixin来声明专门用于with语法的类
+ * 如果三者实现了同一个method，那么首先当前类的重写具有最高优先级，其次是with的类的优先级，with中最后一个类具有最高优先级，然后是extends的优先级，最后是implements(当然这种情况下比如当前类做重写了)
+ * 在minxin中，对当前类使用is Type语法，返回对是true。这一点和接口类似。
+ * 当我们想要在不共享相同类层次结构的多个类之间共享行为时，或者在超类中实现此类行为没有意义时，Mixins非常有用。比如Flutter中的RenderSliverHelpers
+ * 还可以使用语法：mixin name on classname 来指定可以使用这个mixin的类必须是on后面的类的子类.使用mixin声明的类不能被实例化。
+ * mixin语法还在发展，后续应该会有增强和完善。
+ *
+ */
+
+/**
+ * class variable and methods
+ * class内部使用static修饰的variable和methods属于class层面的，不能通过类的instance来访问，直接使用类名来访问，当需要class-wide state and constants的时候这非常有用，否则应该使用top-level variable & methods
+ * 官方对于怎么使用的建议是:Note: Consider using top-level functions, instead of static methods, for common or widely used utilities and functionality.
+ */
 
 
+// ignore: slash_for_doc_comments
+/**
+ * 泛型：
+ * Dart支持真泛型，也就是泛型的信息是带入运行时的。
+ * Dart中restrict一个泛型，只能使用extends（表示接受特定类型及其子类的类型作为泛型约定），不能使用super
+ * 泛型针对class和method，由于泛型在Dart带入运行时，泛型可以直接用于一个变量的所有操作
+ * 泛型method不可以脱离泛型类，也就是只能在泛型类内定义泛型method,泛型方法。泛型方法不能是static的。
+ */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class GenericDemo<T extends num> {
+  T printGenericT(T t) {
+    print(t.toString());
+    return t;
+  }
+}
 
 
 
