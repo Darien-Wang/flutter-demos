@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 int calculate() {
   return 6 * 6;
 }
@@ -96,6 +98,7 @@ class TheVariable {
  */
 
 ///Operators操作符
+// ignore: slash_for_doc_comments
 /**
  * 操作符有很多种，包含单目的，双目的等等，一部分是可以重写的："https://dart.dev/guides/language/language-tour#overridable-operators"
  * ==操作符定义在Object中，默认实现是测定两个对象是不是同一个，当然这个操作符可以被重写，同时应该重写hashcode method.
@@ -105,6 +108,15 @@ class TheVariable {
  * 对于声明了类型的null值，比如：String name = null,在运行时只会获取Null类型的行为，所以在null值上的操作后果，可以通过Null类型来判定
  * 比如：null值上面调用method或者properties，不会有空指针异常而是noSuchMethod错误(属性调用的默认是get或者set操作)
  */
+class OperatorVectorDemo {
+  double x, y;
+
+  OperatorVectorDemo(this.x, this.y);
+
+  OperatorVectorDemo operator +(OperatorVectorDemo other) {
+    return OperatorVectorDemo(this.x + other.x, this.y + other.y);
+  }
+}
 
 ///Control flow statements，这一部分没有特别的地方
 /**
@@ -271,16 +283,145 @@ class GenericDemo<T extends num> {
  *  对于外置的库使用：'package:xxx'来引入
  *  可以给一个库设置前缀，import 'package:xxx' as yyy
  *  可以部分引入一个库，import 'package:xxx' show xxxy或者hide xxxz
+ *  还可以lazy load一个库，这个属于flutter web的内容，我没深入看。
  *
  *
- *  对于flutter而言：包有两种：
+ *  对于flutter而言：我么涉及的包有两种：
  *  1，dart package。这种包里面只有dart的代码
  *  2，flutter plugin，这种包还包含native端的代码
  *  3, 还有一种flutter module用于混合项目的开发，但是这个不适合我们的项目，没怎么看过。
+ *
  */
 
+// ignore: slash_for_doc_comments
+/**
+ * async support
+ *
+ * Dart中，异步函数支持的核心是Future和Stream
+ * 使用async和await可以避免嵌套地狱，带来同步一般的异步写法。
+ *
+ * future的使用有两种选择
+ * 1  使用async和await的组合
+ * 2  使用[Future]的API
+ *
 
 
+ */
+// ignore: slash_for_doc_comments
+/**
+ * Dart的异步语法的核心是Future,而Stream更像是一堆future的流发送，还有一个是async function。future是An object representing a delayed computation.A Future is used to represent a potential value, or error, that will be available at some time in the future. Receivers of a Future can register callbacks that handle the value or error once it is available.
+    Future类似类似Rxjava，可以添加onSuccess，onError回掉，可以添加多个success回调，Each successor is treated independently and is handled as if it was the only successor.
+    Future可以配合await写出类似同步的操作，这种情况下，调用的函数必须使用async来标注：functionName() async {await future}
+    使用链式的catchError的做法可以捕获执行错误，在then语法里面传递onError,注意onError或者catchError的必须使用（Error error,{StackTrace StackTrace} => void语法，否则无法触发.
+    async配合函数使用，返回的一定是futrue，函数内部是否使用await是可选的，await必须在async内部使用，一般是配合future函数的，这样是让异步写法变成同步的样子，防止地狱回调。
+    对于await调用，try catch语句依然适用。
+    在then调用中，使用了高阶函数的声明Future<R> then<R>(FutureOr<R> onValue(T value), {Function onError});其中的FutureOr<R> onValue(T value)参数申明了一个函数参数，类型是返回FutureOr<R>传参类型为T的参数。而后者的onError声明属于可选参数，并且属于named可选参数，这里的坑是虽然这个地方没有限制函数的传参，但其实必须使用Error error,{StackTrace StackTrace}传参，否则无法被回调。
+    这里面的FutureOr<R>目前从类继承结构上，不能明白为什么可以代表Future<R>或者R。
+    无论是catchError还是onError的调用，都无法在链式语法里面捕获then语法的FutureOr<R> onValue(T value)内部的错误。
+    另外发现，前面的onError调用会拦截error继续往下传递，当然then和catchError的链式语法中还会有新的调用，所以可以认为错误处理，处理了最近的错误，然后不再往下传递。onError中抛出的错误，可以在后续的catchError中被处理。
+    证明的代码如下：
+ */
+
+class TestFuture1 {
+  void main() {
+    walk(1).then((value) => 1, onError: (error) {
+      print(error.runtimeType);
+      throw Exception("error happens");
+    }).catchError((error) => print('catch le = $error'));
+  }
+
+  Future<int> walk(int a) async {
+    print('执行了walk');
+    throw Exception();
+  }
+}
+// ignore: slash_for_doc_comments
+/**
+ * 一旦error发生，执行会跳转到最近到error处理，然后继续往下执行，代码如下：
+
+    输出：
+    执行了walk
+    error = Instance of 'Error'
+    执行了run
+ */
+
+class TestFuture2 {
+  void main() {
+    walk(1)
+        .then((value) => run(value))
+        .catchError((error) => print('error = $error'))
+        .then((value) => run(value));
+    walk(1) //这一段walk代码和上面的效果是一样的
+        .then((value) => run(value),
+        onError: (error) => print('error = $error'))
+        .then((value) => run(value));
+  }
+
+  Future<int> walk(int a) async {
+    print('执行了walk');
+    throw Error();
+  }
+
+  Future<int> run(int a) async {
+    print('执行了run');
+  }
+}
+// ignore: slash_for_doc_comments
+/**
+ * 上面的代码稍加修改，可以证明我们可以在onError里面返回值来处理错误的情况：
+
+    输出：
+    执行了walk
+    error = Instance of 'Error'
+    执行了run 参数a = 99
+
+
+    onError中如果不执行返回，则a = null；
+ */
+
+class TestFuture3 {
+  void main() {
+    walk(1)
+        .then((value) => run(value), onError: (error) {
+      print('error = $error');
+      return 99;
+    })
+        .then((value) => run(value));
+  }
+
+  Future<int> walk(int a) async {
+    print('执行了walk');
+    throw Error();
+  }
+
+  Future<int> run(int a) async {
+    print('执行了run 参数a = $a');
+  }
+}
+
+/**
+ *  Waiting for multiple futures。我们可以使用下面的语法来处理同时等待多个异步函数完成的情况。
+
+    Future deleteLotsOfFiles() async =>  ...
+    Future copyLotsOfFiles() async =>  ...
+    Future checksumLotsOfOtherFiles() async =>  ...
+    await Future.wait([
+    deleteLotsOfFiles(),
+    copyLotsOfFiles(),
+    checksumLotsOfOtherFiles(),
+    ]);
+    print('Done with all the long steps!');
+ */
+
+/**
+ * Streams。
+    对于Streams的处理有两种语法：
+    1，可以使用await for（varOrType identifier in Stream) {}来处理所有的数据项。这样的使用必须在async下面。
+    2. 可以使用.listen()的链式语法
+    处理错误：
+    对于使用await for的语法，应该使用try catch来处理错误。
+    如果使用链式语法，可以注册onError来处理错误。
+ */
 
 
 
