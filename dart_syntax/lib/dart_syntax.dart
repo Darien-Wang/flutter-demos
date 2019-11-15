@@ -1,11 +1,9 @@
-import 'dart:ffi';
+///this document is a supplement for official document:"https://dart.dev/guides/language/language-tour"
+///this document focus on what is used frequently but the official document didn't explain in detail.
 
-int calculate() {
-  return 6 * 6;
-}
-
+//this is a single-line comment
 /*
-multi-line comments,
+this is a multi-line comment,
    */
 
 ///this is single line documentation comments
@@ -29,6 +27,62 @@ multi-line comments,
 
 /**
  * Dart的关键词："https://dart.dev/guides/language/language-tour#keywords"
+ *
+    abstract :用于声明抽象类
+    dynamic:用于申明不要类型的，这个和Object的用法区别不慎明了，目前官方的解释也比较笼统："https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed"
+    implements:实现接口，由于Dart中没有专门的接口，每一个类都是一个隐式的接口，implements其实实现的是类定义的协议
+    show:用于库的部分倒入
+    hide：用于库的部分隐藏
+    as:类型转换,错误的类型转换会抛出异常，对于null值的转换不会有任何异常
+    if else 条件语句
+    import 导入包
+    static 声明class method 或者 class variable
+    assert：用于develop期间，做断言测试，正式运行的包不会执行
+    enum 声明枚举
+    in 用于for-in循环语法
+    super：用于召唤父类
+    async：用于声明异步函数
+    export：用于声明对外暴露的类
+    interface:这个关键词应该是被移除了，官方的点击链接也是指向stack overflow的讨论，不建议作为标志符
+    switch case default：用于分支的语法，default必须防止在最后一项。
+    await：用于async包围的function body
+    extends：用于继承一个类
+    is：用于判断是否是否个类型，对于null值的判断只会判定为Null
+    sync：用于Generator语法，"https://dart.dev/guides/language/language-tour#generators"
+    break：用于switch case语法用于终止向下一个case的执行，用于for循环，终止当前循环
+    continue:用于跳过循环的某一次，继续执行下一轮循环
+    external：用于声明某个实现是平台相关的，比如[Object]的==，hashcode等方法都标注为这个。"https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart"
+    library：用于声明一个library的名字，通常在一个包的lib下面的直接层级的dart文件内，定义：library name
+    this：用于指代当前类的对象本身
+    factory：用于修饰构造函数，声明为一个factory constructor，和普通构造函数的区别是，这里可以使用return语句。
+    mixin:用于声明一个只能用于with语法的类，提供了介于extends和implements的混合能力
+    throw：用于跑出一个除了null之外的对象，通常用于抛出Exception
+    try on catch finally:try语法用于包裹执行体，on用于检测特定的exception，catch语法用于全部的exception，finally用于无论是否异常一定执行的语句块
+    false true：用于声明bool值
+    new:用在构造函数之前，目前dart这个关键词是可选的
+    class：用于声明一个类
+    final：用于声明一个只能被赋值一次的值
+    null：声明一个null值，所有对象默认值就是null
+    const：声明一个编译器常量，用于dart的基本数据类型和拥有const构造函数的类
+    typedef ：也被称为：function-type alias,用于给函数声明一个名字，typedef只针对函数，并且包含了函数的返回值，传参类型等签名信息。是比Function更加严格的约束
+    for:用于for循环，包含常规的for循环和for-in循环
+    operator:用于操作符重写，语法是：returnType operator overridableOperator(param) {function body}
+    var:用于声明一个引用，但是不指明引用的类型，而是使用类型推导
+    covariant：用于申明重写函数的参数的协变，也就是在子类中函数参数可以使用原来参数的子类行
+    Function ：用于声明函数类型
+    part：用于声明一个dart文件包含另外一个dart文件，被包含的dart文件使用part of来声明自己是某个dart文件的一部分，二者是配套使用的
+    void：声明不用返回特定类型的函数，默认的返回就是void
+    get set:用于申明getter和setter函数，语法是：returnType get propertyName(){function body}  set propertyName(oneParam){function body}
+    rethrow:用于catch语法中重新抛出object（不能是null）
+    while do:用于while或者do-while循环
+    deferred：用于延迟加载，用于flutter_web项目，语法是：import "package:xxx" deferred as yyy,其中yyy作为库引用的别称
+    return：用于函数的返回
+    with：和mixin组合，是dart中介于extends和implements的一种类组合方案
+    set：
+    yield：用于Generator语法：用来发送value。在synchronous generator,返回类型是Iterable<T>,在asynchronous generator中返回Stream<T>
+
+
+
  */
 
 ///Variables:"https://dart.dev/guides/language/language-tour#variables"
@@ -53,7 +107,6 @@ class TheVariable {
 ///You can initialize an object of any of these special types using a literal. For example, 'this is a string' is a string literal, and true is a boolean literal.
 ///详细信息："https://dart.dev/guides/language/language-tour#built-in-types
 ///这块可以关注 spread operator（...）和null-aware spread operator (...?)，字符串模版，“raw” string， multi-line string，const list，const set，const map
-
 
 ///函数Functions:"https://dart.dev/guides/language/language-tour#functions"
 /**
@@ -144,7 +197,6 @@ class OperatorVectorDemo {
  * finally用于无论异常是否发生，都要执行的代码块，类似于java，在finally中使用return语句可以刷新函数的返回（仅用于只是探讨，不建议finally做return）
  */
 
-
 ///Class
 // ignore: slash_for_doc_comments
 /**
@@ -203,7 +255,7 @@ abstract class ClassDemo {
   void walk();
 
   //抽象类可以配置NamedConstructor，但这并不能被调用，因为抽象类不能被初始化
-  ClassDemo.nullInstance(String name) :name = name;
+  ClassDemo.nullInstance(String name) : name = name;
 
   //抽象类可以配置常规的Constructor，但这并不能被调用，因为抽象类不能被初始化
   const ClassDemo(this.name);
@@ -254,7 +306,6 @@ class ClassDemoImpl implements ClassDemo {
  * 官方对于怎么使用的建议是:Note: Consider using top-level functions, instead of static methods, for common or widely used utilities and functionality.
  */
 
-
 // ignore: slash_for_doc_comments
 /**
  * 泛型：
@@ -303,101 +354,7 @@ class GenericDemo<T extends num> {
  * future的使用有两种选择
  * 1  使用async和await的组合
  * 2  使用[Future]的API
- *
-
-
  */
-// ignore: slash_for_doc_comments
-/**
- * Dart的异步语法的核心是Future,而Stream更像是一堆future的流发送，还有一个是async function。future是An object representing a delayed computation.A Future is used to represent a potential value, or error, that will be available at some time in the future. Receivers of a Future can register callbacks that handle the value or error once it is available.
-    Future类似类似Rxjava，可以添加onSuccess，onError回掉，可以添加多个success回调，Each successor is treated independently and is handled as if it was the only successor.
-    Future可以配合await写出类似同步的操作，这种情况下，调用的函数必须使用async来标注：functionName() async {await future}
-    使用链式的catchError的做法可以捕获执行错误，在then语法里面传递onError,注意onError或者catchError的必须使用（Error error,{StackTrace StackTrace} => void语法，否则无法触发.
-    async配合函数使用，返回的一定是futrue，函数内部是否使用await是可选的，await必须在async内部使用，一般是配合future函数的，这样是让异步写法变成同步的样子，防止地狱回调。
-    对于await调用，try catch语句依然适用。
-    在then调用中，使用了高阶函数的声明Future<R> then<R>(FutureOr<R> onValue(T value), {Function onError});其中的FutureOr<R> onValue(T value)参数申明了一个函数参数，类型是返回FutureOr<R>传参类型为T的参数。而后者的onError声明属于可选参数，并且属于named可选参数，这里的坑是虽然这个地方没有限制函数的传参，但其实必须使用Error error,{StackTrace StackTrace}传参，否则无法被回调。
-    这里面的FutureOr<R>目前从类继承结构上，不能明白为什么可以代表Future<R>或者R。
-    无论是catchError还是onError的调用，都无法在链式语法里面捕获then语法的FutureOr<R> onValue(T value)内部的错误。
-    另外发现，前面的onError调用会拦截error继续往下传递，当然then和catchError的链式语法中还会有新的调用，所以可以认为错误处理，处理了最近的错误，然后不再往下传递。onError中抛出的错误，可以在后续的catchError中被处理。
-    证明的代码如下：
- */
-
-class TestFuture1 {
-  void main() {
-    walk(1).then((value) => 1, onError: (error) {
-      print(error.runtimeType);
-      throw Exception("error happens");
-    }).catchError((error) => print('catch le = $error'));
-  }
-
-  Future<int> walk(int a) async {
-    print('执行了walk');
-    throw Exception();
-  }
-}
-// ignore: slash_for_doc_comments
-/**
- * 一旦error发生，执行会跳转到最近到error处理，然后继续往下执行，代码如下：
-
-    输出：
-    执行了walk
-    error = Instance of 'Error'
-    执行了run
- */
-
-class TestFuture2 {
-  void main() {
-    walk(1)
-        .then((value) => run(value))
-        .catchError((error) => print('error = $error'))
-        .then((value) => run(value));
-    walk(1) //这一段walk代码和上面的效果是一样的
-        .then((value) => run(value),
-        onError: (error) => print('error = $error'))
-        .then((value) => run(value));
-  }
-
-  Future<int> walk(int a) async {
-    print('执行了walk');
-    throw Error();
-  }
-
-  Future<int> run(int a) async {
-    print('执行了run');
-  }
-}
-// ignore: slash_for_doc_comments
-/**
- * 上面的代码稍加修改，可以证明我们可以在onError里面返回值来处理错误的情况：
-
-    输出：
-    执行了walk
-    error = Instance of 'Error'
-    执行了run 参数a = 99
-
-
-    onError中如果不执行返回，则a = null；
- */
-
-class TestFuture3 {
-  void main() {
-    walk(1)
-        .then((value) => run(value), onError: (error) {
-      print('error = $error');
-      return 99;
-    })
-        .then((value) => run(value));
-  }
-
-  Future<int> walk(int a) async {
-    print('执行了walk');
-    throw Error();
-  }
-
-  Future<int> run(int a) async {
-    print('执行了run 参数a = $a');
-  }
-}
 
 /**
  *  Waiting for multiple futures。我们可以使用下面的语法来处理同时等待多个异步函数完成的情况。
@@ -423,30 +380,8 @@ class TestFuture3 {
     如果使用链式语法，可以注册onError来处理错误。
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Reflection:反射语法：
+ * 反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参加核心库预览："https://dart.dev/guides/libraries"
+ * 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
+ */
