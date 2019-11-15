@@ -26,7 +26,7 @@ this is a multi-line comment,
  */
 
 /**
- * Dart的关键词："https://dart.dev/guides/language/language-tour#keywords"
+ * Dart的关键词："https://dart.dev/guides/language/language-tour#keywords",这些关键词不要用于identifier。
  *
     abstract :用于声明抽象类
     dynamic:用于申明不要类型的，这个和Object的用法区别不慎明了，目前官方的解释也比较笼统："https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed"
@@ -49,7 +49,7 @@ this is a multi-line comment,
     extends：用于继承一个类
     is：用于判断是否是否个类型，对于null值的判断只会判定为Null
     sync：用于Generator语法，"https://dart.dev/guides/language/language-tour#generators"
-    break：用于switch case语法用于终止向下一个case的执行，用于for循环，终止当前循环
+    break：用于switch case语法用于终止向下一个case的执行，用于循环，终止当前循环
     continue:用于跳过循环的某一次，继续执行下一轮循环
     external：用于声明某个实现是平台相关的，比如[Object]的==，hashcode等方法都标注为这个。"https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart"
     library：用于声明一个library的名字，通常在一个包的lib下面的直接层级的dart文件内，定义：library name
@@ -78,11 +78,8 @@ this is a multi-line comment,
     deferred：用于延迟加载，用于flutter_web项目，语法是：import "package:xxx" deferred as yyy,其中yyy作为库引用的别称
     return：用于函数的返回
     with：和mixin组合，是dart中介于extends和implements的一种类组合方案
-    set：
-    yield：用于Generator语法：用来发送value。在synchronous generator,返回类型是Iterable<T>,在asynchronous generator中返回Stream<T>
-
-
-
+    set：声明Set数据结构，Set内元素不允许重复,判断的依据是hashcode和==操作符，当其中一个不同的时候就会认为是不同的。
+    yield：用于Generator语法：用来发送value。在synchronous generator返回类型是Iterable<T>,在asynchronous generator中返回Stream<T>
  */
 
 ///Variables:"https://dart.dev/guides/language/language-tour#variables"
@@ -108,6 +105,7 @@ class TheVariable {
 ///详细信息："https://dart.dev/guides/language/language-tour#built-in-types
 ///这块可以关注 spread operator（...）和null-aware spread operator (...?)，字符串模版，“raw” string， multi-line string，const list，const set，const map
 
+
 ///函数Functions:"https://dart.dev/guides/language/language-tour#functions"
 /**
  * 这块的重点是：函数在Dart中同样是对象，类型是Function，所以可以像操作class一样使用Function。
@@ -118,7 +116,7 @@ class TheVariable {
  *
  * 函数支持重写，不支持重载，也即是在Dart中同一个类内不允许有同名的函数（因为可选参数的存在，其实重载已经没有意义）。
  *
- * 对于单行函数可以使用=>来直接返回bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
+ * 对于单行函数可以使用=>来直接返回,比如：bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
  *
  * 对于函数，有两种参数： required and optional.
  * 对于optional参数，包含两种： named or positional。两种不能共存
@@ -129,6 +127,8 @@ class TheVariable {
  * Instance methods，属于绑定对象的函数，可以通过this访问，
  *
  * getters和setter是特殊的函数，用于提供read和write的控制，每个instance field包含隐式的getter and|or setter，
+ *
+ * 所有函数都有返回值，如果不指定，return null被隐式的添加到function body。
  */
 
 ///main函数："https://dart.dev/guides/language/language-tour#the-main-function"
@@ -140,7 +140,7 @@ class TheVariable {
  * 在Dart中，这取决于layout of the code。
  */
 
-///Lexical closures（词法闭包）
+///Lexical closures（词法闭包):"https://dart.dev/guides/language/language-tour#lexical-closures"
 /**
  *A closure is a function object that has access to variables in its lexical scope, even when the function is used outside of its original scope.
  */
@@ -160,6 +160,14 @@ class TheVariable {
  * 因为null的特殊性，说明一下。null在Dart中的类型是Null（重写了toString方法），null在运行时为单例的，所以相关的==操作返回true
  * 对于声明了类型的null值，比如：String name = null,在运行时只会获取Null类型的行为，所以在null值上的操作后果，可以通过Null类型来判定
  * 比如：null值上面调用method或者properties，不会有空指针异常而是noSuchMethod错误(属性调用的默认是get或者set操作)
+ *
+ * 介绍几个常用的有用的操作符：
+ * a ??= b 用于a为null的情况下赋值,
+ * expr1 ?? expr2如果expr1不是null，返回expr1，否则返回expr2。这个在if语句中用于防止被判定的bool为null很好用
+ * .. 级联操作符，allow you to make a sequence of operations on the same object
+ * ?.Conditional member access。当被调用的是null的时候，不会触发noSuchMethod异常，而是直接返回null，和上面两个操作符可以配合使用
+ *
+ *
  */
 class OperatorVectorDemo {
   double x, y;
@@ -371,7 +379,8 @@ class GenericDemo<T extends num> {
  */
 
 /**
- * Streams。
+ * Streams。Stream objects appear throughout Dart APIs, representing sequences of data.
+ * 我个人认为Stream最形象的比喻不是管道，而是流水线。
     对于Streams的处理有两种语法：
     1，可以使用await for（varOrType identifier in Stream) {}来处理所有的数据项。这样的使用必须在async下面。
     2. 可以使用.listen()的链式语法
