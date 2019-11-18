@@ -20,7 +20,8 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 
 ## [Provider框架](https://pub.flutter-io.cn/packages/provider)
 #### A mixture between dependency injection (DI) and state management, built with widgets for widgets.
-    provider
+因为我们的重点是flutter_bloc框架，我们着重介绍flutter_bloc依赖的**ValueDelegateWidget**类
+
 
 ## [bloc框架](https://pub.flutter-io.cn/packages/bloc)
 #### A dart package that helps implement the BLoC pattern.
