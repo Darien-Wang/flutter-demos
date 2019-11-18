@@ -13,7 +13,7 @@ An app showing the usage and principle of bloc
 
 flutter_bloc框架，主要包含三个由三个框架构成：flutter_bloc，bloc，provider
 - provider框架的核心能力有两个：
-  1. 提供在subtree中获取value的能力
-  2. 提供value的dispose接口
+    a. 提供在subtree中获取value的能力
+    b. 提供value的dispose接口
 - bloc框架的核心能力是提供两个BroadcastStream，用于管理event和state的转换
 
