@@ -21,10 +21,18 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 ## [Provider框架](https://pub.flutter-io.cn/packages/provider)
 #### A mixture between dependency injection (DI) and state management, built with widgets for widgets.
 因为我们的重点是flutter_bloc框架，我们着重介绍flutter_bloc依赖的**ValueDelegateWidget**类
+**ValueDelegateWidget**:  
+    
 
 
 ## [bloc框架](https://pub.flutter-io.cn/packages/bloc)
 #### A dart package that helps implement the BLoC pattern.
+- **BlocSupervisor**  
+    一个持有BlocDelegate的单例
+- **BlocDelegate**  
+    一个持有onEvent，onTransition,onError三个方法的类，用于hook操作
+- **Bloc**
+    Bloc继承于Stream并实现了Sink接口
 
 ## [flutter_bloc框架](https://pub.flutter-io.cn/packages/flutter_bloc)
 #### A Flutter package that helps implement the BLoC pattern.因为除此之外还有针对angular的实现
@@ -40,7 +48,7 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 - **BlocProvider类:**  
     BlocProvider继承于ValueDelegateWidget（在Provider框架内）继承于DelegateWidget(也在Provider框架内)继承于StatefulWidget.
   	BlocProvider用于给自己的children提供bloc，子children使用BlocProvider.of<T>(context)来获取bloc，这样Widget的subtree获取的bloc是同一个instance。
-  	BlocProvide有两个公开的构造函数，分别是BlocProvider(ValueBuilder<T> builder,Widget T)和BlocProvider.value(T value,Widget child).BlocProvider的类泛型是Bloc<dynamic, dynamic>的子类，所以ValueBuilder<T>的签名是（context） =》 T。前者构造函数和后者NamedConstructor的区别是前者会对Bloc进行自动的close（因为这个通常这里的bloc应该是new出来的，不应该使用现有的bloc，不然会被注销掉，从而使得bloc原来绑定的页面无法刷新），但是后者是不注销bloc的。利用这一点，可以在相邻的两个页面使用同一个bloc进行页面的管理。
+  	BlocProvide有两个公开的构造函数，分别是BlocProvider(ValueBuilder<T> builder,Widget T)和BlocProvider.value(T value,Widget child).BlocProvider的类泛型是Bloc<dynamic, dynamic>的子类，所以ValueBuilder<T>的签名是（context） => T。前者构造函数和后者NamedConstructor的区别是前者会对Bloc进行自动的close（因为这个通常这里的bloc是new出来的，不应该使用现有的bloc，不然会被注销掉，从而使得bloc原来绑定的页面无法刷新），但是后者是不注销bloc的。利用这一点，可以在相邻的两个页面使用同一个bloc进行页面的管理。
 - **MultiBlocListener类:**  
     类似于BlocProvider，flutter_bloc框架提供了MultiBlocListener，来解决BlocListener嵌套的问题。
   	MultiBlocListener继承于StatelessWidget，同样只包含了List<BlocListener>和Widget child两个属性，构造函数也只是向这两个属性赋值。
