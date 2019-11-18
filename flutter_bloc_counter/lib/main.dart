@@ -19,23 +19,7 @@ class MyApp extends StatelessWidget {
 //    );
 //  }
 
-  //写法二：相对于写法三，似乎是冗余的。
-//  @override
-//  Widget build(BuildContext context) {
-//    return BlocProvider<CounterBloc>(
-//      builder: (context) => CounterBloc(),
-//      child: BlocBuilder<CounterBloc, int>(
-//        builder: (context, count) {
-//          return MaterialApp(
-//            title: 'Flutter Counter Demo',
-//            home: HomePage(),
-//          );
-//        },
-//      ),
-//    );
-//  }
-
-  //写法三：对比写法一，只是调整了MaterialApp和BlocProvider的层级，不会有任何问题，这个为什么？和MaterialApp有关系吗？
+  //写法二：对比写法一，只是调整了MaterialApp和BlocProvider的层级，不会有任何问题，这个为什么？和MaterialApp有关系吗？
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CounterBloc>(

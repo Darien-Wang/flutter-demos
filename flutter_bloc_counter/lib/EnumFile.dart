@@ -1,1 +1,0 @@
-enum Brand{bmw, mini}

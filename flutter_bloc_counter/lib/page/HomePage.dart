@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
               child: Icon(Icons.navigate_next),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
+                  //这里使用.value构造函数，
                   builder: (context) => BlocProvider.value(
                     value: BlocProvider.of<CounterBloc>(context),
                     child: CounterPage(),

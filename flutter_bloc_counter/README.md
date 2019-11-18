@@ -1,16 +1,19 @@
-# flutter_app
+# flutter_bloc_counter
 
-A new Flutter application.
+An app showing the usage and principle of bloc
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Flutter application.
+- 定义自己的bloc，继承于bloc，重写initialState属性和mapEventToState方法
+- 使用BlocProvider作为最外层的widget，构造函数传入T Function(BuildContext context)和child
+- 在child的页面：使用BlocProvider.of<T>(context)的class方法来获取Bloc
+- 在child的页面：使用BlocBuilder，构造函数传入Widget Function(BuildContext context, S state)来根据state构建widget
 
-A few resources to get you started if this is your first Flutter project:
+## Principle
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+flutter_bloc框架，主要包含三个由三个框架构成：flutter_bloc，bloc，provider
+- provider框架的核心能力有两个：
+1. 提供在subtree中获取value的能力
+2. 提供value的dispose接口
+-bloc框架的核心能力是提供两个BroadcastStream，用于管理event和state的转换
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
