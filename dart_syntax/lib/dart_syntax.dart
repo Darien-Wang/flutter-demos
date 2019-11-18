@@ -380,17 +380,27 @@ class GenericDemo<T extends num> {
 
 /**
  * Streams。Stream objects appear throughout Dart APIs, representing sequences of data.
- * 我个人认为Stream最形象的比喻不是管道，而是流水线。
-    对于Streams的处理有两种语法：
-    1，可以使用await for（varOrType identifier in Stream) {}来处理所有的数据项。这样的使用必须在async下面。
-    2. 可以使用.listen()的链式语法
-    处理错误：
-    对于使用await for的语法，应该使用try catch来处理错误。
-    如果使用链式语法，可以注册onError来处理错误。
+ * 官方对于Stream的介绍很少，这里有一些More Info::"https://dart.dev/guides/libraries/library-tour#more-information-1"
+ * 我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
  */
 
 /**
  * Reflection:反射语法：
  * 反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参加核心库预览："https://dart.dev/guides/libraries"
  * 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
+ */
+
+/**
+ * Typedefs:定义一个函数别名：定义函数的入参和返回类型。
+ */
+
+/**
+ * Isolates：意味者隔离。
+ * 在Dart里面，没有线程的概念，取而代之的是Isolate
+ * Each isolate has its own memory heap, ensuring that no isolate’s state is accessible from any other isolate.
+ *
+ * 所以在Dart里面，没有多线程抢占的开销，但是有Isolate间通信的开销
+ * 在面对IO密集场景的时候，建议使用单线程模型。Isolate主要面向计算密集的场景
+ * 关于异步的开销可以看一篇阿里的公众号文章了解：https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491875&idx=1&sn=cb915675f6b1892d22bd434b372910c7&chksm=e92adc2cde5d553aad57ee1cc552744e1a43a5dfaa9a82444c41d557d1b3f7a05dd7b31b39e6&mpshare=1&scene=1&srcid=&sharer_sharetime=1574059736222&sharer_shareid=21d726102aad19c71aba0ca73ae8f9dd&pass_ticket=J8%2FnYKmjTGkQh%2BjCc4hg0LJToeKR1sjVCLaqOfzKzq5zfJmoWMlTORnzfAp80%2B96#rd
+ * 关于Isolate的使用可以参考官方的demo：https://github.com/flutter/samples/tree/master/isolate_example
  */
