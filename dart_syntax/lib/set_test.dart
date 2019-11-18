@@ -39,5 +39,4 @@ class A {
     print('执行了hashCode');
     return 1 + Random().nextInt(100);
   }
-
 }
