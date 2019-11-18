@@ -23,9 +23,12 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
     provider
 
 ## [bloc框架](https://pub.flutter-io.cn/packages/bloc)
+### A dart package that helps implement the BLoC pattern.
 
 ## [flutter_bloc框架](https://pub.flutter-io.cn/packages/flutter_bloc)
+### A Flutter package that helps implement the BLoC pattern.因为除此之外还有针对angular的实现
 关于flutter_bloc框架的类解读
+**字体加粗**
 - BlocBuilder类:  
     这个类继承于BlocBuilderBase,而后者又直接继承自StatefulWidget。BlocBuilder只有一个const的构造函数，强制要求的传参是builder，这是一个函数类型，函数签名是：（context，state）=》Widget。这个只是用于widget的build方法返回一个widget。
   	BlocBuilder的构造函数里有一个bloc参数，如果这个参数不传递，则BlocBuilder会使用BlocProvider和当前的BuildContext自动执行查找。尽量不要在BlocBuilder内使用bloc参数，除非你确定你只想要一个当前类内的局部bloc，而不是可以通过父BlocProvider或者当前BuildContext可以访问的bloc。
