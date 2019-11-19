@@ -88,17 +88,14 @@
     set：声明Set数据结构，Set内元素不允许重复,判断的依据是hashcode和==操作符，当其中一个不同的时候就会认为是不同的。
     yield：用于Generator语法：用来发送value。在synchronous generator返回类型是Iterable<T>,在asynchronous generator中返回Stream<T>   
 ### [Variables](https://dart.dev/guides/language/language-tour#variables)  
-    ```
-    const topLevelConstString = 'Bob'; //可以定义一个Top Level的const reference
-    class TheVariable {
-      var name = 'Bob';//使用var关键词，隐式的使用了类似了类型推导。
-      static const staticConstStringReference =
-          "Bob"; //如果定义一个class level的const，必须使用static修饰。事实上因为const是编译期常量，必须使用static修饰。
-      var constValue =
-      const [
-      ]; //this show define of const value,not const reference,这种情况，constValue可以重新指向新的值。
-    }
-    ```
+```
+const topLevelConstString = 'Bob'; //可以定义一个Top Level的const reference
+class TheVariable {
+  var name = 'Bob'; //使用var关键词，隐式的使用了类似了类型推导。
+  static const staticConstStringReference = "Bob"; //如果定义一个class level的const，必须使用static修饰。事实上因为const是编译期常量，必须使用static修饰。
+  var constValue = const []; //this show define of const value,not const reference,这种情况，constValue可以重新指向新的值。
+}
+```
 ### [Built-in types](https://dart.dev/guides/language/language-tour#built-in-types)
     numbers,strings,booleans,lists (also known as arrays),sets,maps,runes (for expressing Unicode characters in a string),symbols
     You can initialize an object of any of these special types using a literal. For example, 'this is a string' is a string literal, and true is a boolean literal.

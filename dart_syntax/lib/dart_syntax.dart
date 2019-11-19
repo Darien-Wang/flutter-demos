@@ -6,7 +6,6 @@
 ///详细信息："https://dart.dev/guides/language/language-tour#built-in-types
 ///
 
-
 ///函数:""
 /**
  *
@@ -302,3 +301,10 @@ class GenericDemo<T extends num> {
  * 关于异步的开销可以看一篇阿里的公众号文章了解：https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491875&idx=1&sn=cb915675f6b1892d22bd434b372910c7&chksm=e92adc2cde5d553aad57ee1cc552744e1a43a5dfaa9a82444c41d557d1b3f7a05dd7b31b39e6&mpshare=1&scene=1&srcid=&sharer_sharetime=1574059736222&sharer_shareid=21d726102aad19c71aba0ca73ae8f9dd&pass_ticket=J8%2FnYKmjTGkQh%2BjCc4hg0LJToeKR1sjVCLaqOfzKzq5zfJmoWMlTORnzfAp80%2B96#rd
  * 关于Isolate的使用可以参考官方的demo：https://github.com/flutter/samples/tree/master/isolate_example
  */
+
+class TheVariable {
+  var name = 'Bob'; //使用var关键词，隐式的使用了类似了类型推导。
+  static const staticConstStringReference = "Bob"; //如果定义一个class level的const，必须使用static修饰。事实上因为const是编译期常量，必须使用static修饰。
+  var constValue = const [
+  ]; //this show define of const value,not const reference,这种情况，constValue可以重新指向新的值。
+}
