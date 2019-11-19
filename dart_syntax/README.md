@@ -1,4 +1,18 @@
-A sample command-line application.
+# A app demo for Dart Syntax.
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+### this document is a supplement for [official document](https://dart.dev/guides/language/language-tour)
+### this document focus on what is used frequently but the official document didn't explain in detail.
+
+### 注释
+- 单行注释
+``
+//这是一个单行注释
+``
+- 多行注释
+``
+/*
+ *这是一个多行注释
+*/
+``
+
+

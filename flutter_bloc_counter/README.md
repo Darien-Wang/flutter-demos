@@ -32,7 +32,7 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
     一个持有BlocDelegate的单例
 - **BlocDelegate**  
     一个持有onEvent，onTransition,onError三个方法的类，用于所有bloc的hook操作
-- **Bloc**
+- **Bloc**  
     Bloc继承于Stream并实现了Sink接口，或者提供了add(添加事件)和close(关闭管理event的PublishSubject和管理state的BehaviorSubject)方法
     Bloc是一个抽象类，暴露了两个接口，一个是initialState属性，另外一个是mapEventToState方法，该方法返回一个Stream<state>的流
     默认构造函数，实现了基于initialState的赋值 _stateSubject = BehaviorSubject<State>.seeded(initialState);
