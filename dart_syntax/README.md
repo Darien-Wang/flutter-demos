@@ -1,6 +1,6 @@
 # A app demo for Dart Syntax.
 
-### this document is a supplement for [official document](https://dart.dev/guides/language/language-tour)
+### this document is a supplement for [official tour document](https://dart.dev/guides/language/language-tour)
 ### this document focus on what is used frequently but the official document didn't explain in detail.
 
 ### 注释
@@ -378,4 +378,7 @@ Streams。Stream objects appear throughout Dart APIs, representing sequences of 
 我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
 Stream的相关介绍在项目的lib文件夹下的stream_test文件。
 
+
+### 详细的官方资料
+这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Java](https://dart.dev/guides/language/effective-dart)
 
