@@ -315,22 +315,25 @@ class GenericDemo<T extends num> {
 ```
 ### [异步支持](https://dart.dev/guides/language/language-tour#asynchrony-support)
 ```
- * Dart中，异步函数支持的核心是Future和Stream
- * 使用async和await可以避免嵌套地狱，带来同步一般的异步写法。
- *
- * future的使用有两种选择
- * 1  使用async和await的组合
- * 2  使用[Future]的API
+Dart中，异步函数支持的核心是Future和Stream
+使用async和await可以避免嵌套地狱，带来同步一般的异步写法。
+future的使用有两种选择
+1  使用async和await的组合
+2  使用[Future]的API
+
+Futrue的获取
+1   通过使用异步函数，也就是function body使用async修饰的函数
+2   也可以使用Futrue的工厂方法，这个不太常见
 ```
 
 ### Reflection
 反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://dart.dev/guides/libraries)  
 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
 
-### TypeDef  
+### [TypeDef](https://dart.dev/guides/language/language-tour#typedefs)  
 Typedefs:定义一个函数别名：定义函数的入参和返回类型。
 
-### Isolates
+### [Isolates](https://dart.dev/guides/language/language-tour#isolates)
 Isolates：意味者隔离。  
 在Dart里面，没有线程的概念，取而代之的是Isolate  
 Each isolate has its own memory heap, ensuring that no isolate’s state is accessible from any other isolate.  
@@ -345,5 +348,6 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 Streams。Stream objects appear throughout Dart APIs, representing sequences of data.  
 官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)  
 我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
+Stream的相关介绍在项目的lib文件夹下的stream_test文件。
 
 
