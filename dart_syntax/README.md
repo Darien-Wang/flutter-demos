@@ -3,27 +3,6 @@
 ### this document is a supplement for [official tour document](https://dart.dev/guides/language/language-tour)
 ### this document focus on what is used frequently but the official document didn't explain in detail.
 
-### 注释
-- 单行注释
-```
-// 这是一个单行注释
-```
-- 多行注释
-```
-/*
- * 这是一个多行注释
- */
-```
-- 单行的文档注释
-```
-/// 这是一个单行的文档注释
-```
-- 多行的文档注释
-```
-/**
- * 这是一个多行的文档注释
- */
-```
 ### 重要的概念
 1.  Dart中皆为对象，所有的对象都是class的实例，所有对象都直接或者间接继承于Object。即便是numbers，functions，null也是个对象
 2.  Dart是强类型语言，但是类型声明不是强制的，可以通过类型推导获得，如果希望明确没有类型，可以使用[dynamic],注意：如果仅仅是想表达一个可以使用任何objects，应该使用Object。[dynamic的使用介绍](https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed)
@@ -377,6 +356,29 @@ Streams。Stream objects appear throughout Dart APIs, representing sequences of 
 官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)  
 我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
 Stream的相关介绍在项目的lib文件夹下的stream_test文件。
+
+
+### 注释
+- 单行注释
+```
+// 这是一个单行注释
+```
+- 多行注释
+```
+/*
+ * 这是一个多行注释
+ */
+```
+- 单行的文档注释
+```
+/// 这是一个单行的文档注释
+```
+- 多行的文档注释
+```
+/**
+ * 这是一个多行的文档注释
+ */
+```
 
 
 ### 详细的官方资料
