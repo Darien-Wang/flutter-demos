@@ -1,7 +1,7 @@
 
 //The special, required, top-level function where app execution starts.
 main(List<String> arguments) {
-  throw A();
+  print(walk);
 }
 
 abstract class Animal {
@@ -23,7 +23,9 @@ class A {
   int get hashCode => 1;
 }
 
-void walk() {}
+void walk() {
+  return null;
+}
 
 
 

@@ -6,33 +6,33 @@
 ### 注释
 - 单行注释
 ```
-//这是一个单行注释
+// 这是一个单行注释
 ```
 - 多行注释
 ```
 /*
- *这是一个多行注释
+ * 这是一个多行注释
  */
 ```
 - 单行的文档注释
 ```
-///这是一个单行的文档注释
+/// 这是一个单行的文档注释
 ```
 - 多行的文档注释
 ```
 /**
- *这是一个多行的文档注释
+ * 这是一个多行的文档注释
  */
 ```
 ### 重要的概念
 1.  Dart中皆为对象，所有的对象都是class的实例，所有对象都直接或者间接继承于Object。即便是numbers，functions，null也是个对象
 2.  Dart是强类型语言，但是类型声明不是强制的，可以通过类型推导获得，如果希望明确没有类型，可以使用[dynamic],注意：如果仅仅是想表达一个可以使用任何objects，应该使用Object。[dynamic的使用介绍](https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed)
-3.  Dart支持泛型，支持泛型类和泛型函数。Dart的泛型是存在在运行时的，这意味这我们可以判定一个object is List<int>是Ok的。
+3.  Dart支持泛型，支持泛型类和泛型函数。Dart的泛型是存在在运行时的，这意味这我们可以判定一个object is List<int>是Ok的
 4.  Dart支持top-level functions（比如main函数），绑定class或者object的functions（也就是static或者instance methods），也可以在函数内部创建函数（也就是nested或者local functions）
 5.  Dart支持top-level variables，同时支持绑定class或者object的variables（也就是static或者instance variables），instance variables有时候又被称为字段或者属性
-6.  Dart的访问控制不同于java，Dart可见行控制仅仅是library级别，如果一个对象是用_开头来命名的，那么就是library可见，否则就是到处可见的。
+6.  Dart的访问控制不同于java，Dart可见行控制仅仅是library级别，如果一个对象是用_开头来命名的，那么就是library可见，否则就是到处可见的
 7.  标志符使用字母或者下划线（_）开头，后面可以是字母或者数字的任意组合
-8.  Dart拥有expressions（which have runtime values）和statements（which don`t），简单理解，expression是拥有返回值的(包含void），后者比如if else语句，不具备返回值的能力。statement通常包含一个或者多个expression，but an expression can’t directly contain a statement.
+8.  Dart拥有expressions（which have runtime values）和statements（which don`t），简单理解，expression是拥有返回值的(包含void），后者比如if else语句，不具备返回值的能力。statement通常包含一个或者多个expression，but an expression can’t directly contain a statement
 9.  Dart tools可以报告两种问题：warnings和errors，前者只是警告代码可能不工作，但并不会影响执行。errors可以是编译期或者运行期。编译期错误会组织代码执行，运行期错误会产生exception
 ### [Dart的关键词](https://dart.dev/guides/language/language-tour#keywords),所有关键词不能作为identifier  
 ```
@@ -107,7 +107,7 @@ You can initialize an object of any of these special types using a literal. For 
     
 ### [Functions](https://dart.dev/guides/language/language-tour#functions)  
 ```
-函数重点是：函数在Dart中同样是对象，类型是Function，所以可以像操作class一样使用Function，不如赋值给一个引用，作为函数的传参等。
+函数重点是：函数在Dart中同样是对象，类型是Function，所以可以像操作class一样使用Function，比如赋值给一个引用，作为函数的传参等。
 函数的定义语法
 returnType functionName(param) {
     expressions optional;
@@ -337,13 +337,13 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 
 所以在Dart里面，没有多线程抢占的开销，但是有Isolate间通信的开销  
 在面对IO密集场景的时候，建议使用单线程模型。Isolate主要面向计算密集的场景  
-关于异步的开销可以看一篇[阿里的公众号文章了](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491875&idx=1&sn=cb915675f6b1892d22bd434b372910c7&chksm=e92adc2cde5d553aad57ee1cc552744e1a43a5dfaa9a82444c41d557d1b3f7a05dd7b31b39e6&mpshare=1&scene=1&srcid=&sharer_sharetime=1574059736222&sharer_shareid=21d726102aad19c71aba0ca73ae8f9dd&pass_ticket=J8%2FnYKmjTGkQh%2BjCc4hg0LJToeKR1sjVCLaqOfzKzq5zfJmoWMlTORnzfAp80%2B96#rd)  
-关于Isolate的使用可以参考官方[DEMO](https://github.com/flutter/samples/tree/master/isolate_example)
+关于异步的开销可以看一篇[阿里的公众号文章](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491875&idx=1&sn=cb915675f6b1892d22bd434b372910c7&chksm=e92adc2cde5d553aad57ee1cc552744e1a43a5dfaa9a82444c41d557d1b3f7a05dd7b31b39e6&mpshare=1&scene=1&srcid=&sharer_sharetime=1574059736222&sharer_shareid=21d726102aad19c71aba0ca73ae8f9dd&pass_ticket=J8%2FnYKmjTGkQh%2BjCc4hg0LJToeKR1sjVCLaqOfzKzq5zfJmoWMlTORnzfAp80%2B96#rd)  
+关于Isolate的使用可以参考[官方DEMO](https://github.com/flutter/samples/tree/master/isolate_example)
 
 
 ### Streams 
 Streams。Stream objects appear throughout Dart APIs, representing sequences of data.  
-官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)
+官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)  
 我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
 
 
