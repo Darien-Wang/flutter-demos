@@ -26,7 +26,7 @@
  *
  *
  *
- * 所有函数都有返回值，如果不指定，return null被隐式的添加到function body。
+ *
  */
 
 ///main函数："https://dart.dev/guides/language/language-tour#the-main-function"
