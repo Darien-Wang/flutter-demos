@@ -14,5 +14,10 @@
  *这是一个多行注释
 */
 ``
+``
+public static void mian() {
+    print('it');
+}
+``
 
 
