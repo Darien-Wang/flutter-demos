@@ -379,7 +379,7 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 关于Isolate的使用可以参考[官方DEMO](https://github.com/flutter/samples/tree/master/isolate_example)
 
 ### Reflection
-反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://dart.dev/guides/libraries)  
+反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://api.dart.dev/stable/dart-async/dart-async-library.html)  
 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
 
 
