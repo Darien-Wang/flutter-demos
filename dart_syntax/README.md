@@ -333,6 +333,34 @@ Futrue的获取
 ### [TypeDef](https://dart.dev/guides/language/language-tour#typedefs)  
 Typedefs:定义一个函数别名：定义函数的入参和返回类型。
 
+### [Metadata](https://dart.dev/guides/language/language-tour#metadata)
+Use metadata to give additional information about your code. A metadata annotation begins with the character @, followed by either a reference to a compile-time constant (such as deprecated) or a call to a constant constructor.  
+```
+//注解的使用
+class Television {
+  /// _Deprecated: Use [turnOn] instead._
+  @deprecated
+  void activate() {
+    turnOn();
+  }
+
+  /// Turns the TV's power on.
+  void turnOn() {...}
+}
+```
+```
+//定义注解，核心是必须是const 构造函数
+class Todo {
+  final String who;
+  final String what;
+
+  const Todo(this.who, this.what);
+}
+```
+Metadata can appear before a library, class, typedef, type parameter, constructor, factory, function, field, parameter, or variable declaration and before an import or export directive. You can retrieve metadata at runtime using reflection.  
+根据上面说的，注解的信息可以在运行期反射获得（但这一点在flutter端被禁止了），注解还可以被IDE利用(比如@override)做代码检查。
+注解的深入使用，还可能有利用注解在编译器生成文件，这个属于比较高级的应用，后续可以自己研究。
+
 ### [Isolates](https://dart.dev/guides/language/language-tour#isolates)
 Isolates：意味者隔离。  
 在Dart里面，没有线程的概念，取而代之的是Isolate  
