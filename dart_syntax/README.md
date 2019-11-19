@@ -41,7 +41,7 @@ continue:用于跳过循环的某一次，继续执行下一轮循环
 external：用于声明某个实现是平台相关的，比如[Object]的==，hashcode等方法都标注为这个。"https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart"
 library：用于声明一个library的名字，通常在一个包的lib下面的直接层级的dart文件内，定义：library name
 this：用于指代当前类的对象本身
-factory：用于修饰构造函数，声明为一个factory constructor，和普通构造函数的区别是，这里可以使用return语句。
+factory：用于修饰构造函数，声明为一个factory constructor，和普通构造函数的区别是，这里可以使用return语句。For example, a factory constructor might return an instance from a cache, or it might return an instance of a subtype.
 mixin:用于声明一个只能用于with语法的类，提供了介于extends和implements的混合能力
 throw：用于跑出一个除了null之外的对象，通常用于抛出Exception
 try on catch finally:try语法用于包裹执行体，on用于检测特定的exception，catch语法用于全部的exception，finally用于无论是否异常一定执行的语句块
@@ -379,7 +379,7 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 关于Isolate的使用可以参考[官方DEMO](https://github.com/flutter/samples/tree/master/isolate_example)
 
 ### Reflection
-反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://api.dart.dev/stable/dart-async/dart-async-library.html)  
+反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://api.dart.dev/stable/2.6.1/dart-mirrors/dart-mirrors-library.html)  
 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
 
 
