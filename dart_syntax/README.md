@@ -305,12 +305,40 @@ Futrue的获取
 2   也可以使用Futrue的工厂方法，这个不太常见
 ```
 
-### Reflection
-反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://dart.dev/guides/libraries)  
-反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
-
 ### [TypeDef](https://dart.dev/guides/language/language-tour#typedefs)  
 Typedefs:定义一个函数别名：定义函数的入参和返回类型。
+
+### Streams 
+Streams。Stream objects appear throughout Dart APIs, representing sequences of data.  
+官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)  
+我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
+Stream的相关介绍在项目的lib文件夹下的stream_test文件。
+
+
+### 注释
+- 单行注释
+```
+// 这是一个单行注释
+```
+- 多行注释
+```
+/*
+ * 这是一个多行注释
+ */
+```
+- 单行的文档注释
+```
+/// 这是一个单行的文档注释
+```
+- 多行的文档注释
+```
+/**
+ * 这是一个多行的文档注释
+ */
+```
+
+========================
+以下内容属于不常用的内容，我提一下给一个研究的灵感。
 
 ### [Metadata](https://dart.dev/guides/language/language-tour#metadata)
 Use metadata to give additional information about your code. A metadata annotation begins with the character @, followed by either a reference to a compile-time constant (such as deprecated) or a call to a constant constructor.  
@@ -350,35 +378,9 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 关于异步的开销可以看一篇[阿里的公众号文章](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491875&idx=1&sn=cb915675f6b1892d22bd434b372910c7&chksm=e92adc2cde5d553aad57ee1cc552744e1a43a5dfaa9a82444c41d557d1b3f7a05dd7b31b39e6&mpshare=1&scene=1&srcid=&sharer_sharetime=1574059736222&sharer_shareid=21d726102aad19c71aba0ca73ae8f9dd&pass_ticket=J8%2FnYKmjTGkQh%2BjCc4hg0LJToeKR1sjVCLaqOfzKzq5zfJmoWMlTORnzfAp80%2B96#rd)  
 关于Isolate的使用可以参考[官方DEMO](https://github.com/flutter/samples/tree/master/isolate_example)
 
-
-### Streams 
-Streams。Stream objects appear throughout Dart APIs, representing sequences of data.  
-官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)  
-我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
-Stream的相关介绍在项目的lib文件夹下的stream_test文件。
-
-
-### 注释
-- 单行注释
-```
-// 这是一个单行注释
-```
-- 多行注释
-```
-/*
- * 这是一个多行注释
- */
-```
-- 单行的文档注释
-```
-/// 这是一个单行的文档注释
-```
-- 多行的文档注释
-```
-/**
- * 这是一个多行的文档注释
- */
-```
+### Reflection
+反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://dart.dev/guides/libraries)  
+反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
 
 
 ### 详细的官方资料
