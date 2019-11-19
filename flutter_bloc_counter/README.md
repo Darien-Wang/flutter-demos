@@ -24,6 +24,7 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 - **ValueDelegateWidget**:
     这个类核心就是把相关的操作代理改了StateDelegate类，这个抽象类实现了initDelegate，didUpdateDelegate，dispose的空实现，子类有不同的实现，
     其中对于通过默认构造函数构建的BlocProvider是使用了BuilderStateDelegate，在它的disposer里面对持有的bloc进行了close操作
+- 另外BlocProvider的of(context)方法，其实是调用了Provider类的of(context,listen:false)方法。从而提取到最近的Provider<T>并获取内置的value T。在BlocProvider泛型就是bloc及其子类。
 
 ## [bloc框架](https://pub.flutter-io.cn/packages/bloc)
 #### A dart package that helps implement the BLoC pattern.
