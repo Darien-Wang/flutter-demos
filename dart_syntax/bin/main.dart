@@ -1,7 +1,9 @@
 
 //The special, required, top-level function where app execution starts.
 main(List<String> arguments) {
-  print(walk);
+  var a = 89;
+  var b = 10;
+  print(a ~/ b);
 }
 
 abstract class Animal {

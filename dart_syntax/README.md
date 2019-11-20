@@ -378,6 +378,46 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 关于异步的开销可以看一篇[阿里的公众号文章](https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491875&idx=1&sn=cb915675f6b1892d22bd434b372910c7&chksm=e92adc2cde5d553aad57ee1cc552744e1a43a5dfaa9a82444c41d557d1b3f7a05dd7b31b39e6&mpshare=1&scene=1&srcid=&sharer_sharetime=1574059736222&sharer_shareid=21d726102aad19c71aba0ca73ae8f9dd&pass_ticket=J8%2FnYKmjTGkQh%2BjCc4hg0LJToeKR1sjVCLaqOfzKzq5zfJmoWMlTORnzfAp80%2B96#rd)  
 关于Isolate的使用可以参考[官方DEMO](https://github.com/flutter/samples/tree/master/isolate_example)
 
+我介绍一下Isolate的使用的模版：  
+```
+SendPort childIsolateSP;
+
+Future<Isolate> createIsolate() async {
+  ReceivePort mainIsolateRp = ReceivePort();
+  SendPort mainIsolateSp = mainIsolateRp.sendPort;
+
+  mainIsolateRp.listen((Object message) {
+    if(message is SendPort) {
+      childIsolateSP = message;
+    }
+    if(message == "你好main，我建立好了") {
+      childIsolateSP.send("你好child,那开始庆祝吧");
+    }
+  });
+ return await Isolate.spawn(childIsolateEntryPoint, mainIsolateSp);
+}
+
+void childIsolateEntryPoint(SendPort mainIsolateSp)  {
+  ReceivePort childIsolateRP = ReceivePort();
+  SendPort childIsolateSp = childIsolateRP.sendPort;
+  mainIsolateSp.send(childIsolateSp);
+
+  var greetMain = "你好main，我建立好了";
+
+  mainIsolateSp.send(greetMain);
+  print(greetMain);
+
+  childIsolateRP.listen((Object message) async {
+    if (message == "你好child,那开始庆祝吧") {
+      print(message);
+      print('开始庆祝');
+    }
+  });
+}
+```
+
+
+
 ### Reflection
 反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://api.dart.dev/stable/2.6.1/dart-mirrors/dart-mirrors-library.html)  
 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
@@ -385,4 +425,22 @@ Each isolate has its own memory heap, ensuring that no isolate’s state is acce
 
 ### 详细的官方资料
 这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Java](https://dart.dev/guides/language/effective-dart)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
