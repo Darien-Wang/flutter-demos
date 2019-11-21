@@ -1,8 +1,14 @@
 // ignore: slash_for_doc_comments
+import 'dart:io';
 import 'dart:isolate';
 
 main() async {
   var childIsolate = await createIsolate();
+
+  Future.delayed(Duration(seconds: 3), () {
+    childIsolate.kill(priority: Isolate.immediate);
+    exit(0);
+  });
 }
 
 SendPort childIsolateSP;

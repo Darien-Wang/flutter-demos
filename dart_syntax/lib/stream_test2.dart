@@ -4,11 +4,10 @@ import 'dart:async';
 // ignore: slash_for_doc_comments
 /**
  * 通过Stream Controller获取Stream.
- * 通过查看Stream的源码，因为Stream本身没有add等添加事件的方法，我认为只有Stream Controller的方法才能更详细的操纵一个类
+ * 通过查看Stream的源码，因为Stream本身没有add等添加事件的方法，只有Stream Controller的方法才能更详细的操纵一个类
  * StreamController和Stream都是抽象类，可以认为这两个类定义了主要的类行为
  * 这里继续延伸的话，Future类同处于async库，同样是抽象类，具体的操作类其实都是一些impl子类。
  */
-
 main() async {
 //创建一条处理int类型的流
   StreamController<int> numController = StreamController.broadcast(); //获取广播流

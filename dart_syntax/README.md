@@ -293,17 +293,20 @@ class GenericDemo<T extends num> {
 3, 还有一种flutter module用于混合项目的开发，但是这个不适合我们的项目，没怎么看过。
 ```
 ### [异步支持](https://dart.dev/guides/language/language-tour#asynchrony-support)
-```
 Dart中，异步函数支持的核心是Future和Stream
-使用async和await可以避免嵌套地狱，带来同步一般的异步写法。
-future的使用有两种选择
-1  使用async和await的组合
-2  使用[Future]的API
+[官方介绍异步的章节](https://dart.dev/codelabs/async-await)
+其中在结尾的[这篇文章](https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a)介绍了Event Loop和Isolate的概念，非常建议看看
 
-Futrue的获取
-1   通过使用异步函数，也就是function body使用async修饰的函数
-2   也可以使用Futrue的工厂方法，这个不太常见
-```
+Future的获取
+1. 通过使用异步函数，也就是function body使用async修饰的函数
+2. 也可以使用Future的工厂方法，这个不太常见  
+
+Stream的获取
+1. 通过使用Async Generator
+2. 通过使用Stream的工厂方法，比如Stream.value
+3. 通过StreamController
+更详细的Future和Stream的使用参见本项目的lib文件夹下相关的文件。
+
 
 ### [TypeDef](https://dart.dev/guides/language/language-tour#typedefs)  
 Typedefs:定义一个函数别名：定义函数的入参和返回类型。
