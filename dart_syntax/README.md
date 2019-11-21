@@ -69,19 +69,27 @@
 
 ### [Variables](https://dart.dev/guides/language/language-tour#variables)  
 ```
-const topLevelConstString = 'Bob'; //可以定义一个Top Level的const reference
+//const value唯一不同于const reference的地方在于,前者保存reference的identifier可以指向新的instance。
+const topLevelConstReference = ['Bob'];//top level的const 引用,这里同样使用了类型推导，当然指定类型也是ok的
+var topLevelConstValue = const ['Bob'];//top level的const value，使用类型推导
 class TheVariable {
-  var name = 'Bob'; //使用var关键词，隐式的使用了类似了类型推导。
-  static const staticConstStringReference = "Bob"; //如果定义一个class level的const，必须使用static修饰。事实上因为const是编译期常量，必须使用static修饰。
-  var constValue = const []; //this show define of const value,not const reference,这种情况，constValue可以重新指向新的值。
+  static const classLevelConstReference = ['Bob']; //如果定义一个class level的const，必须使用static修饰。事实上因为const是编译期常量，必须使用static修饰。
+  static var classLevelConstValue = ["Bob"];//class level的const value
+  var instanceLevelValue = ['Bob']; //使用var关键词，隐式的使用了类似了类型推导。你无法定义一个instance level的const value，因为const是编译器常量
+  var instanceLevelConstValue = const ["Bob"]; //this show define of const value,not const reference,这种情况，constValue可以重新指向新的值。
 }
 ```
 ### [Built-in types](https://dart.dev/guides/language/language-tour#built-in-types)  
-```
-numbers,strings,booleans,lists (also known as arrays),sets,maps,runes (for expressing Unicode characters in a string),symbols
-You can initialize an object of any of these special types using a literal. For example, 'this is a string' is a string literal, and true is a boolean literal.
-这块可以关注 spread operator（...）和null-aware spread operator (...?)，字符串模版，“raw” string， multi-line string，const list，const set，const map
-```
+* numbers
+numbers中父类是num，包含int和double，int是64的(在js是54位的)，double是64位的。注意点是这些家伙默认值是null，不是0。
+* strings
+String在Dart中是UTF-16 code units，支持字符串模版，多行字符串(被'''包裹的字符串,仍然解析转义)，以及raw string(r'string'可以不处理转义的)
+* booleans
+* lists (also known as arrays)
+* sets
+* maps
+* runes (for expressing Unicode characters in a string)
+* symbols
     
 ### [Functions](https://dart.dev/guides/language/language-tour#functions)  
 ```

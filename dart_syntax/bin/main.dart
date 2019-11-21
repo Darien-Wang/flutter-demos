@@ -1,9 +1,14 @@
 
 //The special, required, top-level function where app execution starts.
 main(List<String> arguments) {
-  var a = 89;
-  var b = 10;
-  print(a ~/ b);
+  var rawString = r'hello\nworld';
+  var multilineString = '''
+  hello\nworld
+''';
+
+
+  print(rawString);
+  print(multilineString);
 }
 
 abstract class Animal {
@@ -28,6 +33,7 @@ class A {
 void walk() {
   return null;
 }
+
 
 
 
