@@ -1,14 +1,16 @@
 
 //The special, required, top-level function where app execution starts.
 main(List<String> arguments) {
-  var rawString = r'hello\nworld';
-  var multilineString = '''
-  hello\nworld
-''';
+  dynamic x = 'hal';
+  x = 123;
+  print(x);
+  Object y = 'hal';
+  y = 123;
+  var a = 'hal';
+//  a = 123;
+  print(a);
 
-
-  print(rawString);
-  print(multilineString);
+//  y.getit();
 }
 
 abstract class Animal {

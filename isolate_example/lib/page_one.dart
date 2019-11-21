@@ -144,6 +144,7 @@ class SmoothAnimationWidgetState extends State<SmoothAnimationWidget>
   AnimationController _controller;
   Animation<BorderRadius> _borderAnimation;
 
+
   @override
   void initState() {
     super.initState();

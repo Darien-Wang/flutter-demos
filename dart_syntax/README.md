@@ -15,7 +15,7 @@
 9.  Dart tools可以报告两种问题：warnings和errors，前者只是警告代码可能不工作，但并不会影响执行。errors可以是编译期或者运行期。编译期错误会组织代码执行，运行期错误会产生exception
 ### [Dart的关键词](https://dart.dev/guides/language/language-tour#keywords),所有关键词不能作为identifier  
 * abstract :用于声明抽象类
-* dynamic:用于申明不要类型的，这个和Object的用法区别不慎明了，目前官方的解释也比较笼统："https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed"
+* dynamic:用于申明不要类型的需求，关于dynamic的定义在[Dart Programming Language Specification (Version 2.2)](https://dart.dev/guides/language/specifications/DartLangSpec-v2.2.pdf)的19.7章节查看,[Effective Dart中有一段论述](https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed)，可以在个人做了demo放在lib文件夹下面的var_object_dynamic文件下面。
 * implements:实现接口，由于Dart中没有专门的接口，每一个类都是一个隐式的接口，implements其实实现的是类定义的协议
 * show:用于库的部分倒入
 * hide：用于库的部分隐藏
@@ -80,14 +80,12 @@ class TheVariable {
 }
 ```
 ### [Built-in types](https://dart.dev/guides/language/language-tour#built-in-types)  
-* numbers
-numbers中父类是num，包含int和double，int是64的(在js是54位的)，double是64位的。注意点是这些家伙默认值是null，不是0。
-* strings
-String在Dart中是UTF-16 code units，支持字符串模版，多行字符串(被'''包裹的字符串,仍然解析转义)，以及raw string(r'string'可以不处理转义的)
-* booleans
-* lists (also known as arrays)
-* sets
-* maps
+* numbers:numbers中父类是num，包含int和double，int是64的(在js是54位的)，double是64位的。注意点是这些家伙默认值是null，不是0。
+* strings:String在Dart中是UTF-16 code units，支持字符串模版，多行字符串(被'''包裹的字符串,仍然解析转义)，以及raw string(r'string'可以不处理转义的)
+* booleans:bool类型有三个值：true，false，null。三者都是编译期常量，注意在if语句中使用了null会报错：boolean expression must not be null,当然这里有个快速处理的办法就是使用if(bool ?? false)
+* lists:Dart没有Array对象，取而代之的是List，代表ordered group of objects,Dart中有...和...?操作符号，可以快速的把一组list添加到另外一组list。还有collection if和collection for语法来简化list创建
+* sets:Dart中set是唯一元素的集合，这代表== hashcode中至少有一个是不同的（hashcode是==的必要条件）。
+* maps:map is an object that associates keys and values
 * runes (for expressing Unicode characters in a string)
 * symbols
     
@@ -435,6 +433,8 @@ void childIsolateEntryPoint(SendPort mainIsolateSp)  {
 
 ### 详细的官方资料
 这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Java](https://dart.dev/guides/language/effective-dart)
+
+
 
 
 
