@@ -48,7 +48,7 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 - **BlocBuilder类:**  
     这个类继承于BlocBuilderBase,而后者又直接继承自StatefulWidget。BlocBuilder只有一个const的构造函数，强制要求的传参是builder，这是一个函数类型，函数签名是：（context，state）=》Widget。这个只是用于widget的build方法返回一个widget。
   	BlocBuilder的构造函数里有一个bloc参数，如果这个参数不传递，则BlocBuilder会使用BlocProvider和当前的BuildContext自动执行查找。尽量不要在BlocBuilder内使用bloc参数，除非你确定你只想要一个当前类内的局部bloc，而不是可以通过父BlocProvider或者当前BuildContext可以访问的bloc。
-  	BlocBuilder有一个condition参数：这个参数的签名是：（previousState, currentState) => bool,用于控制是否调用builder进行Widget重建（PS：我暂时没想到这个的用处，如果是用于去重或者debounce之类的话，似乎在自定义的bloc里面更合适）
+  	BlocBuildeør有一个condition参数：这个参数的签名是：（previousState, currentState) => bool,用于控制是否调用builder进行Widget重建（PS：我暂时没想到这个的用处，如果是用于去重或者debounce之类的话，似乎在自定义的bloc里面更合适）
   	BlocBuilder源于StatefulWidget，在对应的State类initState方法里面对bloc进行了订阅，在对应的dispose方法进行了取消订阅
 - **BlocListener类:** 
     BlocListener继承于BlocListenerBase继承于StatefulWidget，用于当state变化的时候，调用BlocWidgetListener(签名：（context，state) =》 void）进行一个操作，通常该操作应该是适用于当state每次改变后调用一次的，比如navigation，showing a snackBar，showing a dialog等等。
@@ -76,6 +76,33 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 	RepositoryProvider用于向subtree提供一个repository，children使用RepositoryProvider.of<T>(context)来获取同一个repository的instance。
 	类似于BlocProvider的API，RepositoryProvider同样提供了.value构造函数来构造，这里要求泛型T应该使用现有的，而不是new出来的。
 	从源码层面来看，RepositoryProvider只是在Provider的基础上增加了static T of<T>(context)方法，该方法其实也是调用了Provider的static T of<T>（context，listen:false）方法，所以可以视为对Provider的简单包装。  
-	  
+
+## 下面不做类解析，直接说明几个核心的问题：
+### bloc类的event怎么和state关系上的
+bloc作为一个抽象函数，暴露出来的重要接口就是Stream<State> mapEventToState(Event event),这个接口由开发者实现，可以根据event转换为对应的state
+
+### bloc中管理State的Stream何时订阅的，何时取消订阅的
+- 订阅：这个在BlocBuilder类的State类里面，在initState方法内部调用了_subscribe私有方法，里面调用了bloc的listen方法，而这个方法其实就是stateStream流的订阅
+- 取消订阅：这个在BlocBuilder类的State类里面，在dispose方法内部调用了_unsubscribe私有方法，里面执行了流的取消订阅
+### bloc何时关闭的内部的Stream
+这个在BlocProvider类的父类DelegateWidget的State类里面，里面调用了代理类StateDelegate类的dispose方法，这个StateDelegate在BlocProvider里面，
+由于BlocProvider创建方式不同而不同，如果是普通的new出来的，会使用BuilderStateDelegate子类，这个子类调用了bloc.close来关闭了内部的两个Stream。
+如果使用BlocProvider的value构造方法，这个地方的默认实现是空的，也就是不关闭bloc，所以可以用于多个页面共享同一个bloc
+
+### 为什么不单独使用bloc框架
+bloc框架本身只是提供了两个基于RxDart的Stream，以及Stream的订阅和bloc的close接口，它无法解决在flutter超多的widget嵌套中获取bloc本身的能力，这一点其实是Provider框架的能力。
+
+### 为什么不单独使用provider框架
+首先Provider类，在静态方法debugCheckInvalidValueType并不允许value是Listenable或者Stream
+那么支持Stream的StreamProvider类，需要直接管理一个stream(这显然太复杂了)，这无法实现我们event和state的转换管理在一个框架的诉求(这其实就是bloc做的事情),
+
+### 为什么采用了flutter_bloc
+简单而说:flutter_bloc帮我们减少了模版代码的开销。
+flutter_bloc框架的核心类BlocProvider和Provider类一样都继承于ValueDelegateWidget类，从这个类的State代理给了StateDelegate，核心的暴露就是initDelegate和dispose接口，
+我们在前者完成了bloc的构建，在后者完成了bloc的close。
+
+### 为什么BlocProvider.of<T extends Bloc>(BuildContext context)可以获取T extends Bloc
+
+
 
 
