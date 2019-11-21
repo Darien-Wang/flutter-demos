@@ -17,7 +17,10 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 - bloc是business logic component的缩写，bloc本身继承于stream，并且持有两个stream(一个event，一个state)。bloc在dart里面实现了[Bloc pattern](https://www.didierboelens.com/2018/08/reactive-programming---streams---bloc/)
 - flutter_bloc依赖上述两个框架的能力，使得在全局寻找bloc，管理bloc的流的生命周期，并使用bloc来分离并联系UI和逻辑层成为可能。
 
+## bloc分层的原理
 ![基于business logic component的软件fen层](https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/bloc_architecture.png)
+## bloc在flutter的原理图示
+![Bloc在flutter的图解](https://www.didierboelens.com/images/streams_bloc.png)
 
 ## [Provider框架](https://pub.flutter-io.cn/packages/provider)
 #### A mixture between dependency injection (DI) and state management, built with widgets for widgets.
