@@ -15,7 +15,7 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 - provider框架的核心能力有两个：
     1. 提供在subtree中获取value的能力
     2. 提供value的dispose接口
-- bloc是business logic component的缩写，bloc在dart里面实现了[Bloc pattern](https://www.didierboelens.com/2018/08/reactive-programming---streams---bloc/)
+- bloc是business logic component的缩写，bloc本身继承于stream，并且持有两个stream(一个event，一个state)。bloc在dart里面实现了[Bloc pattern](https://www.didierboelens.com/2018/08/reactive-programming---streams---bloc/)
 - flutter_bloc依赖上述两个框架的能力，使得在全局寻找bloc，管理bloc的流的生命周期，并使用bloc来分离并联系UI和逻辑层成为可能。
 
 ## [Provider框架](https://pub.flutter-io.cn/packages/provider)
