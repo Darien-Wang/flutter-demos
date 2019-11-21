@@ -90,28 +90,29 @@ class TheVariable {
 * symbols:represents an operator or identifier declared in a Dart program.
     
 ### [Functions](https://dart.dev/guides/language/language-tour#functions)  
-```
-函数重点是：函数在Dart中同样是对象，类型是Function，所以可以像操作class一样使用Function，比如赋值给一个引用，作为函数的传参等。
+函数重点是：函数在Dart中同样是对象，类型是Function，所以可以像操作class一样使用Function，比如赋值给一个引用，作为函数的传参等。  
 函数的定义语法
+```
 returnType functionName(param) {
     expressions optional;
     return expr;
 }
-函数支持重写，不支持重载，也即是在Dart中同一个类内不允许有同名的函数（因为可选参数的存在，其实重载已经没有意义）。
-对于单行函数可以使用=>来直接返回,比如：bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
-对于函数，有两种参数： required and optional.
-对于optional参数，包含两种： named or positional。两种不能共存
-named params包裹在大括号内声明：void enableFlags({bool bold, bool hidden}) {...}，可以是使用@required来要求必须传递的named param
-positional params包裹在中括号声明：String say(String from, String msg, [String device]){}
-对于可选参数，可以使用=来定义默认值，否则默认值是null，
-Instance methods，属于绑定对象的函数，可以通过this访问，
-class methods,必须通过class访问，无法通过instance访问
-getters和setter是特殊的函数，用于提供read和write的控制，每个instance field包含隐式的getter and|or setter，
-所有函数都有返回值，如果不指定，return null被隐式的添加到function body。
-Every app must have a top-level main() function, which serves as the entrypoint to the app. The main() function returns void and has an optional List<String> parameter for arguments.
-async functions is a function whose body is marked with the async modifier.
-函数的想等性：top-level和class函数永远是相等的，但是Instance函数的相等必须是同一个instance的函数才ok
 ```
+函数支持重写，不支持重载，也即是在Dart中同一个类内不允许有同名的函数（因为可选参数的存在，其实重载已经没有意义）。  
+对于单行函数可以使用=>来直接返回,比如：bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;  
+对于函数，有两种参数： required and optional.  
+对于optional参数，包含两种： named or positional。两种不能共存  
+named params包裹在大括号内声明：void enableFlags({bool bold, bool hidden}) {...}，可以是使用@required来要求必须传递的named param  
+positional params包裹在中括号声明：String say(String from, String msg, [String device]){}  
+对于可选参数，可以使用=来定义默认值，否则默认值是null，  
+Instance methods，属于绑定对象的函数，可以通过this访问，  
+class methods,必须通过class访问，无法通过instance访问  
+getters和setter是特殊的函数，用于提供read和write的控制，每个instance field包含隐式的getter and|or setter，  
+所有函数都有返回值，如果不指定，return null被隐式的添加到function body。  
+Every app must have a top-level main() function, which serves as the entrypoint to the app. The main() function returns void and has an optional List<String> parameter for arguments.  
+async functions is a function whose body is marked with the async modifier.  
+函数的想等性：top-level和class函数永远是相等的，但是Instance函数的相等必须是同一个instance的函数才ok  
+
 ### [Lexical scope](https://dart.dev/guides/language/language-tour#lexical-scope)
 在Dart中，词法的作用范围取决于layout of the code。并且严格遵循先定义后使用的规则
 
@@ -330,7 +331,7 @@ Stream的相关介绍在项目的lib文件夹下的stream_test文件。
  */
 ```
 
-=========================================  
+==============================================================================  
 以下内容属于不常用的内容，我提一下给一个研究的灵感。
 
 ### [Metadata](https://dart.dev/guides/language/language-tour#metadata)
@@ -408,7 +409,6 @@ void childIsolateEntryPoint(SendPort mainIsolateSp)  {
   });
 }
 ```
-
 
 
 ### Reflection
