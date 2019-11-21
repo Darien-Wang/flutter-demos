@@ -300,7 +300,10 @@ Stream的获取
 
 
 ### [TypeDef](https://dart.dev/guides/language/language-tour#typedefs)  
-Typedefs:定义一个函数别名：定义函数的入参和返回类型。
+Typedefs:定义一个函数别名：定义函数的入参和返回类型。语法是：
+```
+typedef TypeName = returnType Function(params)
+```
 
 ### Streams 
 Streams。Stream objects appear throughout Dart APIs, representing sequences of data.  
