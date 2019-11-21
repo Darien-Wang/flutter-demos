@@ -332,7 +332,7 @@ Stream的相关介绍在项目的lib文件夹下的stream_test文件。
 ```
 
 ==============================================================================  
-_以下内容属于不常用的内容，我提一下给一个研究的灵感。*_
+**以下内容属于不常用的内容，我提一下给一个研究的灵感。**
 
 ### [Metadata](https://dart.dev/guides/language/language-tour#metadata)
 Use metadata to give additional information about your code. A metadata annotation begins with the character @, followed by either a reference to a compile-time constant (such as deprecated) or a call to a constant constructor.  
