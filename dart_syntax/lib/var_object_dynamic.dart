@@ -22,12 +22,13 @@ main(List<String> arguments) {
   //Object
   Object y = 'hal';
   y = 123;
+//  print(y.length);//this compile-time wrong,only Object's member is allowed.
   print(y);
   print('===============================');
 
   //var
   var a = 'hal';
-//  a = 123;//this is compile wrong
+//  a = 123;//this is compile-time wrong
   print(a);
   print(a.isEmpty);
 }
