@@ -84,10 +84,10 @@ class TheVariable {
 * strings:String在Dart中是UTF-16 code units，支持字符串模版，多行字符串(被'''包裹的字符串,仍然解析转义)，以及raw string(r'string'可以不处理转义的)
 * booleans:bool类型有三个值：true，false，null。三者都是编译期常量，注意在if语句中使用了null会报错：boolean expression must not be null,当然这里有个快速处理的办法就是使用if(bool ?? false)
 * lists:Dart没有Array对象，取而代之的是List，代表ordered group of objects,Dart中有...和...?操作符号，可以快速的把一组list添加到另外一组list。还有collection if和collection for语法来简化list创建
-* sets:Dart中set是唯一元素的集合，这代表== hashcode中至少有一个是不同的（hashcode是==的必要条件）。
-* maps:map is an object that associates keys and values
-* runes (for expressing Unicode characters in a string)
-* symbols
+* sets:Dart中set是唯一元素的集合，这代表== hashcode中至少有一个是不同的（hashcode是==的必要条件）。As of Dart 2.3, sets support spread operators (... and ...?) and collection ifs and fors, just like lists do.
+* maps:map is an object that associates keys and values.As of Dart 2.3, maps support spread operators (... and ...?) and collection if and for, just like lists do
+* runes:runes are the UTF-32 code points of a string.
+* symbols:represents an operator or identifier declared in a Dart program.
     
 ### [Functions](https://dart.dev/guides/language/language-tour#functions)  
 ```
