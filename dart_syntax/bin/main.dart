@@ -1,40 +1,22 @@
-
 //The special, required, top-level function where app execution starts.
+import 'dart:async';
+
 main(List<String> arguments) {
-  dynamic x = 'hal';
-  x = 123;
-  print(x);
-  Object y = 'hal';
-  y = 123;
-  var a = 'hal';
-//  a = 123;
-  print(a);
-
-//  y.getit();
+  getNumbers().forEach((element) {
+    print(element);
+  });
 }
 
-abstract class Animal {
-  void chase(covariant Animal x);
+Stream<int> getNumbers() async* {
+  yield 0;
+  for (int i = 0; i < 10; i++) {
+    yield i;
+  }
 }
 
-abstract class Mouse extends Animal {}
-
-abstract class Cat extends Animal {
-  void chase(Mouse x);
-}
-
-class A {
-  @override
-  bool operator ==(other) => true;
-
-//
-  @override
-  int get hashCode => 1;
-}
-
-void walk() {
-  return null;
-}
+Stream<int> skip1
+(
+)
 
 
 

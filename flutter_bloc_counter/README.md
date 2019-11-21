@@ -82,7 +82,9 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 bloc作为一个抽象函数，暴露出来的重要接口就是Stream<State> mapEventToState(Event event),这个接口由开发者实现，可以根据event转换为对应的state
 
 ### bloc中管理State的Stream何时订阅的，何时取消订阅的
-- 订阅：这个在BlocBuilder类的State类里面，在initState方法内部调用了_subscribe私有方法，里面调用了bloc的listen方法，而这个方法其实就是stateStream流的订阅
+- 订阅：这个在BlocBuilder类的State类里面，在initState方法内部调用了_subscribe私有方法，里面调用了bloc的listen方法，而这个方法其实就是stateStream流的订阅。
+注意_subscribe这里有一个细节，_bloc.skip(1).listen在订阅前调用了一次skip。这是因为bloc.value在初次构建的时候使用的是内置wrapper的数据，但是如果订阅之后不做一次skip，这个里的BehaviorSubject会再次给订阅者发送这次数据，造成重复。
+而且这里使用BehaviorSubject支持value属性，没有使用PublishSubject因为这个类不支持保存最近的value。这个问题其实是RxDart引起的。
 - 取消订阅：这个在BlocBuilder类的State类里面，在dispose方法内部调用了_unsubscribe私有方法，里面执行了流的取消订阅
 ### bloc何时关闭的内部的Stream
 这个在BlocProvider类的父类DelegateWidget的State类里面，里面调用了代理类StateDelegate类的dispose方法，这个StateDelegate在BlocProvider里面，
@@ -100,6 +102,7 @@ bloc框架本身只是提供了两个基于RxDart的Stream，以及Stream的订�
 简单而说:flutter_bloc帮我们减少了模版代码的开销。
 flutter_bloc框架的核心类BlocProvider和Provider类一样都继承于ValueDelegateWidget类，从这个类的State代理给了StateDelegate，核心的暴露就是initDelegate和dispose接口，
 我们在前者完成了bloc的构建，在后者完成了bloc的close。
+
 
 ### 为什么BlocProvider.of<T extends Bloc>(BuildContext context)可以获取T extends Bloc
 
