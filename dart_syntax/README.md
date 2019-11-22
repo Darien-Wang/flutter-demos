@@ -279,7 +279,7 @@ class GenericDemo<T extends num> {
 可以部分引入一个库，import 'package:xxx' show xxxy或者hide xxxz  
 还可以lazy load一个库，这个属于flutter web的内容，我没深入看。  
 
-对于flutter而言：我么涉及的包有两种：
+对于flutter而言：涉及的包有两种：
 1. dart package。这种包里面只有dart的代码
 2. flutter plugin，这种包还包含native端的代码
 3. 还有一种flutter module用于混合项目的开发，但是这个不适合我们的项目，没怎么看过。
@@ -295,7 +295,7 @@ Future的获取
 Stream的获取
 1. 通过使用Async Generator
 2. 通过使用Stream的工厂方法，比如Stream.value
-3. 通过StreamController
+3. 通过StreamController  
 更详细的Future和Stream的使用参见本项目的lib文件夹下相关的文件。
 
 
@@ -304,12 +304,6 @@ Typedefs:定义一个函数别名：定义函数的入参和返回类型。语�
 ```
 typedef TypeName = returnType Function(params)
 ```
-
-### Streams 
-Streams。Stream objects appear throughout Dart APIs, representing sequences of data.  
-官方对于Stream的介绍很少，这里有一些[More Info](https://dart.dev/guides/libraries/library-tour#more-information-1)  
-我个人认为Stream最形象的比喻是流水线，而不是管道,具体的使用最好参考Stream和StreamController两个类的源码
-Stream的相关介绍在项目的lib文件夹下的stream_test文件。
 
 
 ### [注释](https://dart.dev/guides/language/language-tour#comments)
