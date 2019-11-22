@@ -2,19 +2,15 @@
 import 'dart:async';
 
 main(List<String> arguments) {
-  print(B().name);
+  print(GenericDemo<int>().printGenericT(11111));
 }
 
-class A {
-  A() {
-    print('A的构造函数');
+class GenericDemo<T> {
+  T printGenericT(T t) {
+    print(t.toString());
+    print(t.hashCode);
+    print((t as String).length);
+    return t;
   }
 }
 
-class B extends A {
-  final String name;
-
-  B() : name = "李明" {
-    print('B的构造函数');
-  }
-}

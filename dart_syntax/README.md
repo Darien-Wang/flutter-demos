@@ -177,8 +177,8 @@ Dart is an object-oriented language with classes and mixin-based inheritance,Eve
 1. [initializer list](https://dart.dev/guides/language/language-tour#initializer-list)(这个可以用于NamedConstructor或者常规的,在构造函数的参数之后，用：分隔，赋值语句用逗号分隔，位于function body的大括号前面，如果没有function body使用分号结束，通常用于给final field赋值，也可以在开发期间用assert语句排除非法输入)  
 2. superclass’s no-arg constructor 
 3. main class’s no-arg constructor  
-NamedConstructor构造函数可以使用:this(params)重定向到本类常规的构造函数。这时候要求不能有function body  
-Factory Constructor，可以使用factory关键词，函数名是类名(所以不能和常规的构造函数共存)，这种构造函数，可以在function body使用return语句，通常用于控制返回子类，或者单例等等。  
+NamedConstructor构造函数可以使用:this(params)重定向到本类常规的构造函数。这时候要求不能有function body(比如BlocProvider的构造函数就是如此)  
+Factory Constructor，可以使用factory关键词，函数名是类名(所以不能和常规的构造函数共存，通常用于)，这种构造函数，可以在function body使用return语句，通常用于控制返回子类，或者单例等等。工厂构造函数可以在Stream看到很多例子。  
 属性：  
 所有的field都包含隐式的getter，如果可以的也包含setter，我们可以使用关键词set和get来定义property，语法是：
 ```
@@ -256,8 +256,8 @@ class内部使用static修饰的variable和methods属于class层面的，不能�
 
 ### [泛型](https://dart.dev/guides/language/language-tour#generics)
 Dart支持真泛型，也就是泛型的信息是带入运行时的  
-Dart针对泛型的restrict约束，只能使用extends（表示接受特定类型及其子类的类型作为泛型约定），不能使用super  
-泛型针对class和method，由于泛型在Dart带入运行时，泛型可以直接用于一个变量的所有操作  
+Dart针对泛型的restrict约束，只能使用extends（表示接受特定类型及其子类的类型作为泛型约束），不能使用super  
+泛型针对class和method，由于泛型在Dart带入运行时，泛型可以直接用于一个变量的所有操作（没有约束的泛型只能使用Object的方法，但是可以使用as来转成对应的类型来操作）
 泛型method不可以脱离泛型类，也就是只能在泛型类内定义泛型method,泛型方法。泛型方法不能是static的。  
 ```
 class GenericDemo<T extends num> {
