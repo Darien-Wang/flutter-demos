@@ -12,7 +12,8 @@ import 'dart:isolate';
  */
 main(List<String> arguments) {
   //dynamic
-  dynamic x = 'hal';
+  dynamic x = 1;
+  x = 'Bob';
   print(x);
   print(x.length);
   print(x
@@ -20,10 +21,10 @@ main(List<String> arguments) {
   print('===============================');
 
   //Object
-  Object y = 'hal';
-  y = 123;
-//  print(y.length);//this compile-time wrong,only Object's member is allowed.
+  Object y = 1;
+  y = "Bob";
   print(y);
+//  print(y.length);//this compile-time wrong,only Object's member is allowed.
   print('===============================');
 
   //var

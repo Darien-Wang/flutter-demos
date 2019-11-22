@@ -9,17 +9,17 @@
 3.  Dart支持泛型，支持泛型类和泛型函数。Dart的泛型是存在在运行时的，这意味这我们可以判定一个```object is List<int>```是Ok的
 4.  Dart支持top-level functions（比如main函数），绑定class或者object的functions（也就是static或者instance methods），也可以在函数内部创建函数（也就是nested或者local functions）
 5.  Dart支持top-level variables，同时支持绑定class或者object的variables（也就是static或者instance variables），instance variables有时候又被称为字段或者属性
-6.  Dart的访问控制不同于java，Dart可见行控制仅仅是library级别，如果一个对象是用_开头来命名的，那么就是library可见，否则就是到处可见的
-7.  标志符使用字母或者下划线（_）开头，后面可以是字母或者数字的任意组合
+6.  Dart的访问控制不同于java，Dart可见行控制仅仅是library级别，如果一个对象是用_开头来命名的，那么就是library可见，否则就是到处可见的(当然Library还有export的控制)
+7.  标志符使用字母或者下划线（_）开头，后面还可以使用数字进行任意组合
 8.  Dart拥有expressions（which have runtime values）和statements（which don`t），简单理解，expression是拥有返回值的(包含void），后者比如if else语句，不具备返回值的能力。statement通常包含一个或者多个expression，but an expression can’t directly contain a statement
-9.  Dart tools可以报告两种问题：warnings和errors，前者只是警告代码可能不工作，但并不会影响执行。errors可以是编译期或者运行期。编译期错误会组织代码执行，运行期错误会产生exception
-### [Dart的关键词](https://dart.dev/guides/language/language-tour#keywords),所有关键词不能作为identifier  
+9.  Dart tools可以报告两种问题：warnings和errors，前者只是警告代码可能不工作，但并不会影响执行。errors可以是编译期或者运行期。编译期错误会阻止代码执行，运行期错误会产生exception
+### [Dart的关键词](https://dart.dev/guides/language/language-tour#keywords) 
 * abstract :用于声明抽象类
 * dynamic:用于申明不要类型的需求，关于dynamic的定义在[Dart Programming Language Specification (Version 2.2)](https://dart.dev/guides/language/specifications/DartLangSpec-v2.2.pdf)的19.7章节查看,[Effective Dart中有一段论述](https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed)，可以在个人做了demo放在lib文件夹下面的var_object_dynamic文件下面。
 * implements:实现接口，由于Dart中没有专门的接口，每一个类都是一个隐式的接口，implements其实实现的是类定义的协议
-* show:用于库的部分倒入
+* show:用于库的部分导入
 * hide：用于库的部分隐藏
-* as:类型转换,错误的类型转换会抛出异常，对于null值的转换不会有任何异常
+* as:类型转换,错误的类型转换会抛出异常(比如：type 'String' is not a subtype of type 'int' in type cast)，对于null值的转换不会有任何异常
 * if else 条件语句
 * import 导入包
 * static 声明class method 或者 class variable
@@ -30,46 +30,46 @@
 * async：用于声明异步函数
 * export：用于声明对外暴露的类
 * interface:这个关键词应该是被移除了，官方的点击链接也是指向stack overflow的讨论，不建议作为标志符
-* switch case default：用于分支的语法，default必须防止在最后一项。
+* switch case default：用于分支的语法，default必须放置在最后一项。
 * await：用于async包围的function body
 * extends：用于继承一个类
 * is：用于判断是否是否个类型，对于null值的判断只会判定为Null
-* sync：用于Generator语法，"https://dart.dev/guides/language/language-tour#generators"
+* sync：用于Generator语法，返回一个Iterable
 * break：用于switch case语法用于终止向下一个case的执行，用于循环，终止当前循环
 * continue:用于跳过循环的某一次，继续执行下一轮循环
-* external：用于声明某个实现是平台相关的，比如[Object]的==，hashcode等方法都标注为这个。"https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart"
+* external：用于声明某个实现是平台相关的，比如Object的==，hashcode等方法都标注为这个。"https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart"
 * library：用于声明一个library的名字，通常在一个包的lib下面的直接层级的dart文件内，定义：library name
 * this：用于指代当前类的对象本身
 * factory：用于修饰构造函数，声明为一个factory constructor，和普通构造函数的区别是，这里可以使用return语句。For example, a factory constructor might return an instance from a cache, or it might return an instance of a subtype.
 * mixin:用于声明一个只能用于with语法的类，提供了介于extends和implements的混合能力
-* throw：用于跑出一个除了null之外的对象，通常用于抛出Exception
+* throw：用于抛出一个除了null之外的对象，通常用于抛出Exception.）throw null会抛异常的（Unhandled exception: Throw of null.）
 * try on catch finally:try语法用于包裹执行体，on用于检测特定的exception，catch语法用于全部的exception，finally用于无论是否异常一定执行的语句块
-* false true：用于声明bool值
+* false true：用于声明bool值，属于编译期常量。
 * new:用在构造函数之前，目前dart这个关键词是可选的
 * class：用于声明一个类
 * final：用于声明一个只能被赋值一次的值
 * null：声明一个null值，所有对象默认值就是null
-* const：声明一个编译器常量，用于dart的基本数据类型和拥有const构造函数的类
+* const：声明一个编译期常量，用于dart的基本数据类型和拥有const构造函数的类
 * typedef ：也被称为：function-type alias,用于给函数声明一个名字，typedef只针对函数，并且包含了函数的返回值，传参类型等签名信息。是比Function更加严格的约束
 * for:用于for循环，包含常规的for循环和for-in循环
 * operator:用于操作符重写，语法是：returnType operator overridableOperator(param) {function body}
 * var:用于声明一个引用，但是不指明引用的类型，而是使用类型推导
-* covariant：用于申明重写函数的参数的协变，也就是在子类中函数参数可以使用原来参数的子类行
+* covariant：用于申明重写函数的参数的协变，也就是在子类中函数参数可以使用原来参数的子类型
 * Function ：用于声明函数类型
 * part：用于声明一个dart文件包含另外一个dart文件，被包含的dart文件使用part of来声明自己是某个dart文件的一部分，二者是配套使用的
-* void：声明不用返回特定类型的函数，默认的返回就是void
-* get set:用于申明getter和setter函数，语法是：returnType get propertyName(){function body}  set propertyName(oneParam){function body}
-* rethrow:用于catch语法中重新抛出object（不能是null）
+* void：声明不用返回特定类型的函数,同样可以作为泛型比如```Future<void>```,[这里有一篇很不错的文档](https://medium.com/dartlang/dart-2-legacy-of-the-void-e7afb5f44df0)
+* get set:用于申明getter和setter函数，语法是:```returnType get propertyName(){function body} ``` ```set propertyName(oneParam){function body}```
+* rethrow:用于catch语法中重新抛出，```rethrow;```不用跟具体的异常类型。
 * while do:用于while或者do-while循环
 * deferred：用于延迟加载，用于flutter_web项目，语法是：import "package:xxx" deferred as yyy,其中yyy作为库引用的别称
-* return：用于函数的返回
+* return：用于函数的出口,循环终止
 * with：和mixin组合，是dart中介于extends和implements的一种类组合方案
 * set：声明Set数据结构，Set内元素不允许重复,判断的依据是hashcode和==操作符，当其中一个不同的时候就会认为是不同的。
 * yield：用于Generator语法：用来发送value。在synchronous generator返回类型是Iterable<T>,在asynchronous generator中返回Stream<T>   
 
 ### [Variables](https://dart.dev/guides/language/language-tour#variables)  
 ```
-//const value唯一不同于const reference的地方在于,前者保存reference的identifier可以指向新的instance。
+//const value和const reference唯一不同的地方在于,前者保存reference的identifier可以指向新的instance。
 const topLevelConstReference = ['Bob'];//top level的const 引用,这里同样使用了类型推导，当然指定类型也是ok的
 var topLevelConstValue = const ['Bob'];//top level的const value，使用类型推导
 class TheVariable {
