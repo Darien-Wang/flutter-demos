@@ -122,7 +122,7 @@ A closure is a function object that has access to variables in its lexical scope
 ### [Operators操作符](https://dart.dev/guides/language/language-tour#operators)
 操作符有很多种，包含单目的，双目的等等，一部分是[可以重写的操作符](https://dart.dev/guides/language/language-tour#overridable-operators)  
 ==操作符定义在Object中，默认实现是测定两个对象是不是同一个，当然这个操作符可以被重写，同时应该重写hashcode method.  
-在Dart中，仍然存在短路与和短路或的操作，我们建议使用短路操作符。而&和|操作符应该值用于Bit操作  
+在Dart中，仍然存在短路与&&和短路或||的操作，我们建议使用短路操作符。而&和|操作符应该值用于Bit操作  
 [Object]顺便提一下：这个类包含一个空的构造函数，==函数，hashcode属性，toString函数，noSuchMethod函数，和runtimeType属性  
 因为null的特殊性，说明一下。null在Dart中的类型是Null（重写了toString方法），null在运行时为单例的，所以相关的==操作返回true  
 对于声明了类型的null值，比如：String name = null,在运行时只会获取Null类型的行为，所以在null值上的操作后果，可以通过Null类型来判定  
@@ -155,7 +155,7 @@ Dart中有以下几种流程控制，没有特别的用法，assert同样只有�
 ### [Exceptions](https://dart.dev/guides/language/language-tour#exceptions)
 在Dart中，没有Checked Exception，也就是系统不强制你捕获异常  
 没有被捕获的异常会引起isolate挂起，也就是当前isolate被终止了  
-Dart包含Exception和Error，二者都继承于Object（而不是类似java属于Throwable子类）（前者用于向用户提供一个failure的信息，后者通常表示一个program failure，用户不应该试图捕获Error而是解决它  
+Dart包含Exception和Error，二者都继承于Object（而不是类似java属于Throwable子类）（前者用于向用户提供一个failure的信息，后者通常表示一个program failure比如OOM，用户不应该试图捕获Error而是解决它  
 对于Dart而言，throw可以是任何none-null的类型，而不局限于Exception。  
 catch一个异常，用于阻止异常的传播并处理他，除非rethrow它，语法类似于  
 ```
@@ -168,15 +168,15 @@ finally用于无论异常是否发生，都要执行的代码块，类似于java
 Dart is an object-oriented language with classes and mixin-based inheritance,Every object is an instance of a class, and all classes descend from Object. Mixin-based inheritance means that although every class (except for Object) has exactly one superclass, a class body can be reused in multiple class hierarchies.  
 注意，针对对象的属性访问，建议使用?.操作符，可以避免null的问题  
 构造函数：  
-包含默认的构造函数（使用类名，空参），构造函数同样可以包含可选参数，也就是包含named和positional参数。  
-如果定义了构造函数，即便是一个NamedConstructor，则不再提供默认的空参构造函数。  
+包含默认的构造函数（使用类名，空参，这个可以被重写），构造函数同样可以包含可选参数，也就是包含named和positional参数。  
+如果提供了有参数的构造函数，或者只提供了NamedConstructor，则不再提供默认的空参构造函数。  
 可以声明const构造函数，这要求类的instance variable都是final的,  
 只有声明了const构造函数的情况下，才可以在调用的时候声明const reference或者const value，这样在做==比对的时候返回true，如果只是普通调用，则在运行时生成普通的instance对象。  
 声明了const构造函数的，必须在NamedConstructor中给final字段赋值  
 默认而言，构造函数调用父类unnamed,no-argument构造函数（如果父类没有这个构造函数，子类必须手动的指定调用父类特定的构造函数），如果包含 initializer list则il最先执行，顺序是：  
-1. initializer list(这个可以用于NamedConstructor或者常规的,在构造函数的参数之后，用：分隔，赋值语句用逗号分隔，位于function body的大括号前面，如果没有function body使用分号结束，通常用于给final field赋值，也可以在开发期间用assert语句排除非法输入)  
+1. [initializer list](https://dart.dev/guides/language/language-tour#initializer-list)(这个可以用于NamedConstructor或者常规的,在构造函数的参数之后，用：分隔，赋值语句用逗号分隔，位于function body的大括号前面，如果没有function body使用分号结束，通常用于给final field赋值，也可以在开发期间用assert语句排除非法输入)  
 2. superclass’s no-arg constructor 
-3. main class’s no-arg constructor
+3. main class’s no-arg constructor  
 NamedConstructor构造函数可以使用:this(params)重定向到本类常规的构造函数。这时候要求不能有function body  
 Factory Constructor，可以使用factory关键词，函数名是类名(所以不能和常规的构造函数共存)，这种构造函数，可以在function body使用return语句，通常用于控制返回子类，或者单例等等。  
 属性：  
