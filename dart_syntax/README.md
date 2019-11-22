@@ -415,6 +415,8 @@ void childIsolateEntryPoint(SendPort mainIsolateSp)  {
 ### 详细的官方资料
 这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Java](https://dart.dev/guides/language/effective-dart)
 
+另外这里有[flutter官方github](https://github.com/flutter),可以看到很多官方的团队的风格。
+
 
 
 
