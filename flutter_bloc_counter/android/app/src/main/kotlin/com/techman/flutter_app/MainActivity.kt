@@ -1,4 +1,4 @@
-package com.techman.flutter_app
+package com.techman.flutter_bloc_counter
 
 import android.os.Bundle
 

@@ -305,7 +305,6 @@ Typedefs:定义一个函数别名：定义函数的入参和返回类型。语�
 typedef TypeName = returnType Function(params)
 ```
 
-
 ### [注释](https://dart.dev/guides/language/language-tour#comments)
 - 单行注释
 ```
@@ -357,7 +356,7 @@ class Todo {
 ```
 Metadata can appear before a library, class, typedef, type parameter, constructor, factory, function, field, parameter, or variable declaration and before an import or export directive. You can retrieve metadata at runtime using reflection.  
 根据上面说的，注解的信息可以在运行期反射获得（但这一点在flutter端被禁止了），注解还可以被IDE利用(比如@override)做代码检查。
-注解的深入使用，还可能有利用注解在编译期间生成文件，这个属于比较高级的应用，后续可以自己研究，相关参考的文章可以看[闲鱼的这篇文章](https://www.yuque.com/xytech/flutter/vf1dpf)。
+注解的深入使用，还有利用注解在编译期间生成文件，这个属于比较高级的应用，后续可以自己研究，相关参考的文章可以看[闲鱼的这篇文章](https://www.yuque.com/xytech/flutter/vf1dpf)。
 
 ### [Isolates](https://dart.dev/guides/language/language-tour#isolates)
 Isolates：意味者隔离。  

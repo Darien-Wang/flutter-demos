@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/page/HomePage.dart';
+import 'package:flutter_bloc_counter/page/HomePage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 
@@ -10,19 +10,20 @@ class AppBlocDelegate extends BlocDelegate {
   @override
   void onError(Bloc bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
-    print("bloc = $bloc error = $error stacktrace = $stacktrace");
+    print(
+        "Global onError:bloc = $bloc error = $error stacktrace = $stacktrace");
   }
 
   @override
   void onEvent(Bloc bloc, Object event) {
     super.onEvent(bloc, event);
-    print('bloc = $bloc event = $event');
+    print('Global onEvent:bloc = $bloc event = $event');
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    print('bloc = $bloc transition = $transition');
+    print('Global bloc = $bloc transition = $transition');
   }
 }
 
