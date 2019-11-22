@@ -87,7 +87,7 @@ class TheVariable {
 * sets:Dart中set是唯一元素的集合，这代表== hashcode中至少有一个是不同的（hashcode是==的必要条件）。As of Dart 2.3, sets support spread operators (... and ...?) and collection ifs and fors, just like lists do.
 * maps:map is an object that associates keys and values.As of Dart 2.3, maps support spread operators (... and ...?) and collection if and for, just like lists do
 * runes:runes are the UTF-32 code points of a string.
-* symbols:represents an operator or identifier declared in a Dart program.
+* [symbols](https://dart.dev/guides/language/language-tour#symbols):represents an operator or identifier declared in a Dart program.
     
 ### [Functions](https://dart.dev/guides/language/language-tour#functions)  
 函数重点是：函数在Dart中同样是对象，类型是Function，所以可以像操作class一样使用Function，比如赋值给一个引用，作为函数的传参等。  
@@ -108,9 +108,9 @@ positional params包裹在中括号声明：String say(String from, String msg, 
 Instance methods，属于绑定对象的函数，可以通过this访问，  
 class methods,必须通过class访问，无法通过instance访问  
 getters和setter是特殊的函数，用于提供read和write的控制，每个instance field包含隐式的getter and|or setter，  
-所有函数都有返回值，如果不指定，return null被隐式的添加到function body。  
+所有函数都有返回值，如果不指定，return null被隐式的添加到function body(void 除外) 
 Every app must have a top-level main() function, which serves as the entrypoint to the app. The main() function returns void and has an optional List<String> parameter for arguments.  
-async functions is a function whose body is marked with the async modifier.  
+async functions: is a function whose body is marked with the async modifier.异步函数的返回是Future
 函数的想等性：top-level和class函数永远是相等的，但是Instance函数的相等必须是同一个instance的函数才ok  
 
 ### [Lexical scope](https://dart.dev/guides/language/language-tour#lexical-scope)
@@ -120,13 +120,13 @@ async functions is a function whose body is marked with the async modifier.
 A closure is a function object that has access to variables in its lexical scope, even when the function is used outside of its original scope.  
 所以闭包在Dart里面只是针对函数的。
 ### [Operators操作符](https://dart.dev/guides/language/language-tour#operators)
-操作符有很多种，包含单目的，双目的等等，一部分是[可以重写的操作符](https://dart.dev/guides/language/language-tour#overridable-operators)
-==操作符定义在Object中，默认实现是测定两个对象是不是同一个，当然这个操作符可以被重写，同时应该重写hashcode method.
-在Dart中，仍然存在短路与和短路或的操作，我们建议使用短路操作符。而&和|操作符应该值用于Bit操作
-[Object]顺便提一下：这个类包含一个空的构造函数，==函数，hashcode属性，toString函数，noSuchMethod函数，和runtimeType属性
-因为null的特殊性，说明一下。null在Dart中的类型是Null（重写了toString方法），null在运行时为单例的，所以相关的==操作返回true
-对于声明了类型的null值，比如：String name = null,在运行时只会获取Null类型的行为，所以在null值上的操作后果，可以通过Null类型来判定
-比如：null值上面调用method或者properties，不会有空指针异常而是noSuchMethod错误(属性调用的默认是get或者set操作)
+操作符有很多种，包含单目的，双目的等等，一部分是[可以重写的操作符](https://dart.dev/guides/language/language-tour#overridable-operators)  
+==操作符定义在Object中，默认实现是测定两个对象是不是同一个，当然这个操作符可以被重写，同时应该重写hashcode method.  
+在Dart中，仍然存在短路与和短路或的操作，我们建议使用短路操作符。而&和|操作符应该值用于Bit操作  
+[Object]顺便提一下：这个类包含一个空的构造函数，==函数，hashcode属性，toString函数，noSuchMethod函数，和runtimeType属性  
+因为null的特殊性，说明一下。null在Dart中的类型是Null（重写了toString方法），null在运行时为单例的，所以相关的==操作返回true  
+对于声明了类型的null值，比如：String name = null,在运行时只会获取Null类型的行为，所以在null值上的操作后果，可以通过Null类型来判定  
+比如：null值上面调用method或者properties，不会有空指针异常而是noSuchMethod错误(属性调用的默认是get或者set操作)  
 介绍几个常用的有用的操作符：
 * a ??= b 用于a为null的情况下赋值,
 * expr1 ?? expr2如果expr1不是null，返回expr1，否则返回expr2。这个在if语句中用于防止被判定的bool为null很好用
