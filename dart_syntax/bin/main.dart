@@ -14,3 +14,12 @@ class GenericDemo<T> {
   }
 }
 
+void walk() async {
+  await eat();
+  print('');
+}
+
+
+Future<void> eat() {
+
+}
