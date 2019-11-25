@@ -339,7 +339,7 @@ var serviceJson = '''
                 "image": "https://bmwstaticresourcestg.blob.core.chinacloudapi.cn/discovericons/iOS/8.1.0/icon_user_manual.png",
                 "name": "驾驶指南",
                 "serviceCode": "Driver's Guide",
-                "description": "{\n    \"bmwdriversguide\": {\n        \"scheme\": \"bmwdriversguide\",\n        \"command\": \"open\",\n        \"appID\": \"839558781\"\n    },\n    \"bmwidriversguide\": {\n        \"scheme\": \"bmwidriversguide\",\n        \"command\": \"open\",\n        \"appID\": \"839567603\"\n    }\n}",
+                "description": "",
                 "shortDescription": "",
                 "type": "service",
                 "uri": "?serviceEntranceName=DriverGuide",
@@ -400,3 +400,6 @@ var serviceJson = '''
   ]
 }
 ''';
+
+//这里有问题：342行原来是非法的json数据
+//"description": "{\n    \"bmwdriversguide\": {\n        \"scheme\": \"bmwdriversguide\",\n        \"command\": \"open\",\n        \"appID\": \"839558781\"\n    },\n    \"bmwidriversguide\": {\n        \"scheme\": \"bmwidriversguide\",\n        \"command\": \"open\",\n        \"appID\": \"839567603\"\n    }\n}",
