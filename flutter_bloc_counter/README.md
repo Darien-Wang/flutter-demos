@@ -101,8 +101,8 @@ bloc框架本身只是提供了两个基于RxDart的Stream，以及Stream的订�
 
 ### 为什么采用了flutter_bloc
 简单而说:flutter_bloc帮我们减少了模版代码的开销。
-flutter_bloc框架的核心类BlocProvider和Provider类一样都继承于ValueDelegateWidget类，从这个类的State代理给了StateDelegate，核心的暴露就是initDelegate和dispose接口，
-我们在前者完成了bloc的构建，在后者完成了bloc的close。
+flutter_bloc框架的核心类BlocProvider类和Provider类一样都继承于ValueDelegateWidget类，从这个类的State代理给了StateDelegate，核心的暴露就是initDelegate和dispose接口，
+前者完成了bloc的构建，后者完成了bloc的close。
 
 ### 为什么BlocProvider.of<T extends Bloc>(BuildContext context)可以获取T extends Bloc
 首先说明一点：这个函数的调用的时间开销是O(1)的，因为在framework层查找是在一个HashMap里面进行的，所以不用担心性能问题。  
