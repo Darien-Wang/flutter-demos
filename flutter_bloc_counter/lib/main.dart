@@ -33,7 +33,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-//  //写法一：问题是在HomePage和CounterPage里面，在内部的view里面使用BlockProvider.of会报错BlocProvider.of() called with a context that does not contain a Bloc of type CounterBloc
+//  //写法一：问题是在于，由于BlocProvider是依赖WidgetTree的，那么作为Homepage的tree的顶端，无法传递到通过路由打开的新页面
 //  @override
 //  Widget build(BuildContext context) {
 //    return MaterialApp(
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
 //    );
 //  }
 
-  //写法二：对比写法一，只是调整了MaterialApp和BlocProvider的层级，不会有任何问题，这个为什么？和MaterialApp有关系吗？
+  //写法二：对比写法一，提高了BlocProvider层级在MaterialApp上面，从而该BlocProvider成为了一个全局的Provider
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CounterBloc>(

@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/CounterBloc.dart';
 
 class CounterPage extends StatelessWidget {
+  CounterPage() {
+    print('进入了 CounterPage');
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
@@ -15,7 +19,7 @@ class CounterPage extends StatelessWidget {
           return Center(
             child: Text(
               '$count',
-              style: TextStyle(fontSize: 24.0),
+              style: TextStyle(fontSize: 66.0),
             ),
           );
         },

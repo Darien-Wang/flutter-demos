@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
           return Center(
             child: Text(
               '$count',
-              style: TextStyle(fontSize: 24.0),
+              style: TextStyle(fontSize: 66.0),
             ),
           );
         },
@@ -41,22 +41,31 @@ class HomePage extends StatelessWidget {
               child: Icon(Icons.navigate_next),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  //这里使用.value构造函数，
-//                  builder: (context) => BlocProvider.value(
-//                    value: BlocProvider.of<CounterBloc>(context),
-//                    child: CounterPage(),
-//                  ),
-//                //这里使用new构造，但是使用同一个bloc
+
+
+                  //这里使用.value构造函数，bloc应该也使用同一份
+                  builder: (context) =>
+                      BlocProvider.value(
+                        value: BlocProvider.of<CounterBloc>(context),
+                        child: CounterPage(),
+                      ),
+
+
+//                //这里使用new构造，但是使用同一个bloc，这样触发了bloc的关闭，前一个页面的订阅也无效了
 //                  builder: (context) => BlocProvider(
 //                    builder: (context) => BlocProvider.of<CounterBloc>(context),
 //                    child: CounterPage(),
 //                  ),
-                  //这里使用new Provider，new Bloc
-                  builder: (context) =>
-                      BlocProvider(
-                        builder: (_) => CounterBloc(),
-                    child: CounterPage(),
-                  ),
+
+
+//                  //这里使用new Provider，new Bloc，两个页面毫无关系。
+//                  builder: (context) =>
+//                      BlocProvider(
+//                        builder: (_) => CounterBloc(),
+//                    child: CounterPage(),
+//                  ),
+
+
                 ));
               },
             ),
