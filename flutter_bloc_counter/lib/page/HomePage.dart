@@ -54,6 +54,8 @@ class HomePage extends StatelessWidget {
                       ),
 
 //                //这里使用new构造，但是使用同一个bloc，这样触发了bloc的关闭，前一个页面的订阅也无效了
+//                //注意这种写法是一个反面的教材，虽然这样写是可以运行的，但是会引起之前订阅bloc页面的失效
+//                //所以每当你使用BlocProvider的默认构造函数的时候，应该提供一个新的bloc
 //                  builder: (context) => BlocProvider(
 //                    builder: (context) => BlocProvider.of<CounterBloc>(context),
 //                    child: CounterPage(),
