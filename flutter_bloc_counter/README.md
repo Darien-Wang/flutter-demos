@@ -87,7 +87,7 @@ bloc作为一个抽象函数，暴露出来的重要接口就是Stream<State> ma
 注意_subscribe这里有一个细节，_bloc.skip(1).listen在订阅前调用了一次skip。这是因为bloc.value在初次构建的时候使用的是内置wrapper的数据，但是如果订阅之后不做一次skip，这个里的BehaviorSubject会再次给订阅者发送这次数据，造成重复。
 而且这里使用BehaviorSubject支持value属性，没有使用PublishSubject因为这个类不支持保存最近的value。这个问题其实是RxDart引起的。
 - 取消订阅：这个在BlocBuilder类的State类里面，在dispose方法内部调用了_unsubscribe私有方法，里面执行了流的取消订阅
-### bloc何时关闭的内部的Stream
+### bloc作为Stream何时被关闭
 这个在BlocProvider类的父类DelegateWidget的State类里面，里面调用了代理类StateDelegate类的dispose方法，这个StateDelegate在BlocProvider里面，
 由于BlocProvider创建方式不同而不同，如果是普通的new出来的，会使用BuilderStateDelegate子类，这个子类调用了bloc.close来关闭了内部的两个Stream。
 如果使用BlocProvider的value构造方法，这个地方的默认实现是空的，也就是不关闭bloc，所以可以用于多个页面共享同一个bloc
