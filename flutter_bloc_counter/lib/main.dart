@@ -33,7 +33,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  //写法一：问题是在HomePage和CounterPage里面，在内部的view里面使用BlockProvider.of会报错BlocProvider.of() called with a context that does not contain a Bloc of type CounterBloc
+//  //写法一：问题是在HomePage和CounterPage里面，在内部的view里面使用BlockProvider.of会报错BlocProvider.of() called with a context that does not contain a Bloc of type CounterBloc
 //  @override
 //  Widget build(BuildContext context) {
 //    return MaterialApp(
@@ -55,43 +55,5 @@ class MyApp extends StatelessWidget {
         home: HomePage(),
       ),
     );
-  }
-}
-
-
-class InheritedTestModel {
-  final int count;
-
-  const InheritedTestModel(this.count);
-}
-
-class InheritedContext extends InheritedWidget {
-  //数据
-  final InheritedTestModel inheritedTestModel;
-
-  //点击+号的方法
-  final Function() increment;
-
-  String Function(String a) aa;
-
-  //点击-号的方法
-  final Function() reduce;
-
-  InheritedContext({
-    Key key,
-    @required this.inheritedTestModel,
-    @required this.increment,
-    @required this.reduce,
-    @required Widget child,
-  }) : super(key: key, child: child);
-
-  static InheritedContext of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(InheritedContext);
-  }
-
-  //是否重建widget就取决于数据是否相同
-  @override
-  bool updateShouldNotify(InheritedContext oldWidget) {
-    return inheritedTestModel != oldWidget.inheritedTestModel;
   }
 }
