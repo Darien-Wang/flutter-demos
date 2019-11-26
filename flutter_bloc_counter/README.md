@@ -68,6 +68,7 @@ flutter_bloc框架主要由三个框架构成：flutter_bloc，bloc，provider�
 - **MultiBlocProvider类:**
     如果涉及向一个route注入多个BlocProvider，可以使用BlocProvider嵌套的写法，但是flutter_bloc提供了更加简洁的封装：MultiBlocProvider。
   	MultiBlocProvider直接继承于StateLessWidget，构造函数只有一个：MultiBlocProvider(List<BlocProvider> providers,Widget child),这也是该类的两个field，
+  	这个类是一个StatelessWidget,在build(context)复写方法里面使用provider.cloneWithChild进行了blocProvider嵌套的组装。
 - **MultiRepositoryProvider类:**  
     类似于MultiBlocProvider，我们可以使用MultiRepositoryProvider来避免嵌套式的声明。同样MultiRepositoryProvider只有两个属性，分别是：List<RepositoryProvider> providers和Widget child。
 - **RepositoryProvider类:**  
@@ -104,6 +105,8 @@ flutter_bloc框架的核心类BlocProvider和Provider类一样都继承于ValueD
 我们在前者完成了bloc的构建，在后者完成了bloc的close。
 
 ### 为什么BlocProvider.of<T extends Bloc>(BuildContext context)可以获取T extends Bloc
+首先说明一点：这个函数的调用的时间开销是O(1)的，因为在framework层查找是在一个HashMap里面进行的，所以不用担心性能问题。
+不过这个HashMap的刷新我还没太看明白。
 
 
 
