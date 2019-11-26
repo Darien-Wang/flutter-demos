@@ -111,3 +111,5 @@ flutter_bloc框架的核心类BlocProvider和Provider类一样都继承于ValueD
 InheritedProvider继承了InheritedWidget.这个类有一个核心的重写方法叫createElement返回了InheritedElement。  
 InheritedElement的核心复写的方法叫_updateInheritance，这里面执行了```_inheritedWidgets[widget.runtimeType] = this;```刷新了map  
 然后在BlocProvider.of方法里面，这个根据type从这个map里面取得了数据。
+
+这里注意使用这个方法的时候要指定泛型，否则你可能获得这个错误：BlocProvider.of() called with a context that does not contain a Bloc of type Bloc<dynamic, dynamic>.
