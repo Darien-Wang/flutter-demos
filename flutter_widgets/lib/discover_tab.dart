@@ -43,8 +43,7 @@ class _DiscoverTabState extends State<DiscoverTab> with WidgetsBindingObserver {
       return Container();
     }
     int newsSectionCount = 1;
-    int groupSectionCount = groups.length;
-    int sectionsCount = groups.length + newsSectionCount - 1;
+    int sectionsCount = groups.length + newsSectionCount;
     return ListView.separated(
       itemCount: sectionsCount,
       separatorBuilder: (context, index) => Divider(),
@@ -53,7 +52,7 @@ class _DiscoverTabState extends State<DiscoverTab> with WidgetsBindingObserver {
         if (0 == section) {
           return _buildBanner(context, newsItems);
         }
-        if (section > 0 && section < sectionsCount - 1) {
+        if (section > 0 && section <= sectionsCount - 1) {
           return _buildGroup(context, groups[section - 1]);
         }
         if (section == sectionsCount) {
