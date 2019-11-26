@@ -42,37 +42,30 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 //鉴于外层使用了一个全局的Provider，我们其实可以直接打开新页面，而无需使用包裹。
                 //由于外层BlocProvider作为一个顶层的Context，不会触发close操作，所以bloc也不会被close。
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CounterPage()));
+//                Navigator.of(context).push(
+//                    MaterialPageRoute(builder: (context) => CounterPage()));
 
+                Navigator.of(context).push(MaterialPageRoute(
+                  //这里使用.value构造函数，bloc应该也使用同一份
+                  builder: (context) =>
+                      BlocProvider.value(
+                        value: BlocProvider.of<CounterBloc>(context),
+                        child: CounterPage(),
+                      ),
 
-//                Navigator.of(context).push(MaterialPageRoute(
-//
-//
-//                  //这里使用.value构造函数，bloc应该也使用同一份
+//                //这里使用new构造，但是使用同一个bloc，这样触发了bloc的关闭，前一个页面的订阅也无效了
+//                  builder: (context) => BlocProvider(
+//                    builder: (context) => BlocProvider.of<CounterBloc>(context),
+//                    child: CounterPage(),
+//                  ),
+
+//                  //这里使用new Provider，new Bloc，两个页面毫无关系。
 //                  builder: (context) =>
-//                      BlocProvider.value(
-//                        value: BlocProvider.of<CounterBloc>(context),
-//                        child: CounterPage(),
-//                      ),
-//
-//
-////                //这里使用new构造，但是使用同一个bloc，这样触发了bloc的关闭，前一个页面的订阅也无效了
-////                  builder: (context) => BlocProvider(
-////                    builder: (context) => BlocProvider.of<CounterBloc>(context),
-////                    child: CounterPage(),
-////                  ),
-//
-//
-////                  //这里使用new Provider，new Bloc，两个页面毫无关系。
-////                  builder: (context) =>
-////                      BlocProvider(
-////                        builder: (_) => CounterBloc(),
-////                    child: CounterPage(),
-////                  ),
-//
-//
-//                ));
+//                      BlocProvider(
+//                        builder: (_) => CounterBloc(),
+//                    child: CounterPage(),
+//                  ),
+                ));
               },
             ),
           )
