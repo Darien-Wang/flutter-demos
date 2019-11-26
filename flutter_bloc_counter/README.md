@@ -105,9 +105,9 @@ flutter_bloc框架的核心类BlocProvider和Provider类一样都继承于ValueD
 我们在前者完成了bloc的构建，在后者完成了bloc的close。
 
 ### 为什么BlocProvider.of<T extends Bloc>(BuildContext context)可以获取T extends Bloc
-首先说明一点：这个函数的调用的时间开销是O(1)的，因为在framework层查找是在一个HashMap里面进行的，所以不用担心性能问题。
-不过这个HashMap的刷新我还没太看明白。
+首先说明一点：这个函数的调用的时间开销是O(1)的，因为在framework层查找是在一个HashMap里面进行的，所以不用担心性能问题。  
 
-
-
-
+源码层面：首先BlocProvider的build方法返回了一个InheritedProvider。  
+InheritedProvider继承了InheritedWidget.这个类有一个核心的重写方法叫createElement返回了InheritedElement。  
+InheritedElement的核心复写的方法叫_updateInheritance，这里面执行了```_inheritedWidgets[widget.runtimeType] = this;```刷新了map  
+然后在BlocProvider.of方法里面，这个根据type从这个map里面取得了数据。
