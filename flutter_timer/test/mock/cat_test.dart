@@ -17,12 +17,11 @@ main() {
   group("cat test", () {
     test("test cat sleep", () {
       expect(cat.sleep(), null);
-
       when(cat.sleep()).thenReturn("我在睡觉");
       expect(cat.sleep(), "我在睡觉"); //这个会报错
     });
 
-    test("cat can walk", () {
+    test("test cat walk", () {
       expect(cat.walk(), null);
     });
   });
