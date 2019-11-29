@@ -17,7 +17,7 @@ main() {
     test("test cat sleep", () {
       expect(cat.sleep(), null);
       when(cat.sleep()).thenReturn(Cat().sleep());
-      expect(cat.sleep(), Cat().sleep()); 
+      expect(cat.sleep(), Cat().sleep());
     });
 
     test("test cat walk", () {
