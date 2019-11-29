@@ -2,24 +2,20 @@
 import 'dart:async';
 
 main(List<String> arguments) {
-  print(GenericDemo<int>().printGenericT(11111));
+  FakeCat().sleep();
 }
 
-class GenericDemo<T> {
-  T printGenericT(T t) {
-    print(t.toString());
-    print(t.hashCode);
-    print((t as String).length);
-    return t;
+class Cat {
+  String sleep() {
+    return "hu~hu~";
   }
 }
 
-void walk() async {
-  await eat();
-  print('');
+class Fake {
+  @override
+  noSuchMethod(Invocation invocation) {
+    throw "no!!";
+  }
 }
 
-
-Future<void> eat() {
-
-}
+class FakeCat extends Fake implements Cat {}
