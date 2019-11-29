@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart' as prefix0;
 import 'package:flutter_timer/bloc/bloc.dart';
 import 'package:flutter_timer/ticker.dart';
 
@@ -8,6 +9,24 @@ void main() {
 
   setUp(() {
     timerBloc = TimerBloc(ticker: Ticker());
+  });
+
+  test("ticker cannot be null in TimerBloc", () {
+    // expect(() => TimerBloc(ticker: null), throwsA(isAssertionError));
+    try {
+      TimerBloc(ticker: null);
+    } catch (e) {
+      expect(e, prefix0.isAssertionError);
+    }
+  });
+
+
+  test("event ==", () {
+    expect(Start(duration: 60) == Start(duration: 60), true);
+    expect(Pause() == Pause(), true);
+    expect(Resume() == Resume(), true);
+    expect(Reset() == Reset(), true);
+    expect(Tick(duration: 60) == Tick(duration: 60), true);
   });
 
   group("TimerBloc Test", () {
@@ -50,6 +69,15 @@ void main() {
         act: (timerBloc) async {
           timerBloc.add(Tick(duration: 59));
           timerBloc.add(Pause());
+        });
+
+    blocTest<TimerBloc, TimerEvent, TimerState>("state paused to state resume",
+        build: () => timerBloc,
+        expect: [Ready(60), Running(59), Paused(59), Running(59)],
+        act: (timerBloc) async {
+          timerBloc.add(Tick(duration: 59));
+          timerBloc.add(Pause());
+          timerBloc.add(Resume());
         });
   });
 }

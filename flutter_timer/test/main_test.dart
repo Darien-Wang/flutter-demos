@@ -10,7 +10,7 @@ main() {
 
     await tester.tap(find.byIcon(Icons.play_arrow));
 
-    await tester.pump(Duration(seconds: 1000));
+    await tester.pump(Duration(seconds: 1));
 
     expect(find.text("01:00"), findsNothing);
   });
