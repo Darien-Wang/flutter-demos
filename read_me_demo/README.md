@@ -6,7 +6,6 @@
 - 路径：
 ```
 /api/poi/search?query=${encodeURIComponent(query)}&origin=${latitude},${longitude}&radius=${radius}&language=${language}&count=${count}
-
 ```
 ### 加油站
 - 路径：
@@ -29,7 +28,6 @@
 ## 以上的返回的数据结构是一样的，都是数组PointOfInterest[]，属于response.body.items
 
 ```
-
 数据类定义如下
 export interface PointOfInterest {
     id: string;
