@@ -3,8 +3,6 @@
 ## 地图相关接入global server的域名是：
 ```
 https://btccommutewebappint.azurewebsites.net
-
-
 ```
 ### 自由文本搜索
 - 路径：
