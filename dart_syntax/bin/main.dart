@@ -19,3 +19,4 @@ class Fake {
 }
 
 class FakeCat extends Fake implements Cat {}
+
