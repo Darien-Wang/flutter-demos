@@ -1,4 +1,4 @@
-# run mobile2.0 step by step
+# Run mobile 2.0 step by step
 
 - 从[mobile20](https://code.connected.bmw/mobile20/mobile-connected)clone项目
 - 运行```dart ./scripts/cli/cli.dart getPackages```拉取所有的包的依赖
