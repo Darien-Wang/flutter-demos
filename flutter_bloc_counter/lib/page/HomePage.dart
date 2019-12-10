@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_bloc_counter/page/CounterPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/CounterBloc.dart';
