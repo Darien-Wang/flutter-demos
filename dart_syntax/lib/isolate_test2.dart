@@ -2,7 +2,6 @@
 /**
  * 展示使用flutter compute计算来简化isolate的使用
  * 这里只是展示语法，因为compute是flutter foundation库的封装，所以在Dart command-line app里面无法引用
- *
  */
 
 main() async {

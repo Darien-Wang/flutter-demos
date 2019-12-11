@@ -1,6 +1,4 @@
 // ignore: slash_for_doc_comments
-import 'dart:io';
-import 'dart:isolate';
 
 // ignore: slash_for_doc_comments
 /**
@@ -27,7 +25,7 @@ main(List<String> arguments) {
 //  print(y.length);//this compile-time wrong,only Object's member is allowed.
   print('===============================');
 
-  //var
+  //var，类型推导其实在编译期间就确定了type
   var a = 'hal';
 //  a = 123;//this is compile-time wrong
   print(a);

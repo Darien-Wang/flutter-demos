@@ -13,10 +13,13 @@
     证明的代码[main]：
  */
 void main() {
-  walk(1).then((value) => 1, onError: (error) {
+  walk(1)
+      .then((value) => 1, onError: (error) {
     print(error);
     throw Exception("error happens");
-  }).catchError((error) => print('catch le = $error'));
+  })
+      .catchError((error) => print('catch le = $error'))
+      .whenComplete(() => print("Done!!!")); //类似try catch finally的写法
 }
 
 Future<int> walk(int a) async {

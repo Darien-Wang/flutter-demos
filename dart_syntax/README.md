@@ -7,42 +7,39 @@
 1.  Dart中皆为对象，所有的对象都是class的实例，所有对象都直接或者间接继承于Object。即便是numbers，functions，null也是个对象
 2.  Dart是强类型语言，但是类型声明不是强制的，可以通过类型推导获得，如果希望明确没有类型，可以使用[dynamic],注意：如果仅仅是想表达一个可以使用任何objects，应该使用Object。[dynamic的使用介绍](https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed)
 3.  Dart支持泛型，支持泛型类和泛型函数。Dart的泛型是存在在运行时的，这意味这我们可以判定一个```object is List<int>```是Ok的
-4.  Dart支持top-level functions（比如main函数），绑定class或者object的functions（也就是static或者instance methods），也可以在函数内部创建函数（也就是nested或者local functions）
-5.  Dart支持top-level variables，同时支持绑定class或者object的variables（也就是static或者instance variables），instance variables有时候又被称为字段或者属性
-6.  Dart的访问控制不同于java，Dart可见行控制仅仅是library级别，如果一个对象是用_开头来命名的，那么就是library可见，否则就是到处可见的(当然Library还有export的控制)
-7.  标志符使用字母或者下划线（_）开头，后面还可以使用数字进行任意组合
-8.  Dart拥有expressions（which have runtime values）和statements（which don`t），简单理解，expression是拥有返回值的(包含void），后者比如if else语句，不具备返回值的能力。statement通常包含一个或者多个expression，but an expression can’t directly contain a statement
-9.  Dart tools可以报告两种问题：warnings和errors，前者只是警告代码可能不工作，但并不会影响执行。errors可以是编译期或者运行期。编译期错误会阻止代码执行，运行期错误会产生exception
+4.  Dart支持top-level，class-level,instance-level的functions（比如main函数），variable。
+5.  Dart的访问控制不同于java，Dart可见性控制仅仅是library级别，如果一个对象是用_开头来命名的，那么就是library可见，否则就是到处可见的(当然Library还有export的控制)
+6.  标志符使用字母或者下划线（_）开头，后面还可以使用数字进行任意组合
 ### [Dart的关键词](https://dart.dev/guides/language/language-tour#keywords) 
 * abstract :用于声明抽象类
-* dynamic:用于申明不要类型的需求，关于dynamic的定义在[Dart Programming Language Specification (Version 2.2)](https://dart.dev/guides/language/specifications/DartLangSpec-v2.2.pdf)的19.7章节查看,[Effective Dart中有一段论述](https://dart.dev/guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed)，可以在个人做了demo放在lib文件夹下面的var_object_dynamic文件下面。
+* dynamic:用于申明不要类型的需求，关于它和object还有var的区别，demo里放在lib文件夹下面的var_object_dynamic文件下面。
 * implements:实现接口，由于Dart中没有专门的接口，每一个类都是一个隐式的接口，implements其实实现的是类定义的协议
 * show:用于库的部分导入
 * hide：用于库的部分隐藏
 * as:类型转换,错误的类型转换会抛出异常(比如：type 'String' is not a subtype of type 'int' in type cast)，对于null值的转换不会有任何异常
 * if else 条件语句
 * import 导入包
-* static 声明class method 或者 class variable
+* static 声明class-level function or variable
 * assert：用于develop期间，做断言测试，正式运行的包不会执行
 * enum 声明枚举
 * in 用于for-in循环语法
 * super：用于召唤父类
 * async：用于声明异步函数
 * export：用于声明对外暴露的类
-* interface:这个关键词应该是被移除了，官方的点击链接也是指向stack overflow的讨论，不建议作为标志符
+* interface:这个关键词应该是被移除了，官方的点击链接也是指向stack overflow的讨论
 * switch case default：用于分支的语法，default必须放置在最后一项。
-* await：用于async包围的function body
+* await：用于async函数的同步调用
 * extends：用于继承一个类
-* is：用于判断是否是否个类型，对于null值的判断只会判定为Null
-* sync：用于Generator语法，返回一个Iterable
+* is：用于判断是否是某种类型，对于null值的判断只会判定为Null
+* sync：用于同步Generator语法，返回一个Iterable
 * break：用于switch case语法用于终止向下一个case的执行，用于循环，终止当前循环
 * continue:用于跳过循环的某一次，继续执行下一轮循环
-* external：用于声明某个实现是平台相关的，比如Object的==，hashcode等方法都标注为这个。"https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart"
+* external：用于声明某个实现是平台相关的，比如Object的==，hashcode等方法都标注为这个。比如:[这个讨论](https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart)
 * library：用于声明一个library的名字，通常在一个包的lib下面的直接层级的dart文件内，定义：library name
 * this：用于指代当前类的对象本身
 * factory：用于修饰构造函数，声明为一个factory constructor，和普通构造函数的区别是，这里可以使用return语句。For example, a factory constructor might return an instance from a cache, or it might return an instance of a subtype.
 * mixin:用于声明一个只能用于with语法的类，提供了介于extends和implements的混合能力
-* throw：用于抛出一个除了null之外的对象，通常用于抛出Exception.）throw null会抛异常的（Unhandled exception: Throw of null.）
+* throw：用于抛出一个除了null之外的对象，通常用于抛出Exception. throw null会抛异常的（Unhandled exception: Throw of null.）
 * try on catch finally:try语法用于包裹执行体，on用于检测特定的exception，catch语法用于全部的exception，finally用于无论是否异常一定执行的语句块
 * false true：用于声明bool值，属于编译期常量。
 * new:用在构造函数之前，目前dart这个关键词是可选的
@@ -105,20 +102,22 @@ returnType functionName(param) {
 named params包裹在大括号内声明：void enableFlags({bool bold, bool hidden}) {...}，可以是使用@required来要求必须传递的named param  
 positional params包裹在中括号声明：String say(String from, String msg, [String device]){}  
 对于可选参数，可以使用=来定义默认值，否则默认值是null，  
-Instance methods，属于绑定对象的函数，可以通过this访问，  
-class methods,必须通过class访问，无法通过instance访问  
 getters和setter是特殊的函数，用于提供read和write的控制，每个instance field包含隐式的getter and|or setter，  
 所有函数都有返回值，如果不指定，return null被隐式的添加到function body(void 除外) 
 Every app must have a top-level main() function, which serves as the entrypoint to the app. The main() function returns void and has an optional List<String> parameter for arguments.  
-async functions: is a function whose body is marked with the async modifier.异步函数的返回是Future
-函数的想等性：top-level和class函数永远是相等的，但是Instance函数的相等必须是同一个instance的函数才ok  
+async functions: 也就是异步函数，is a function whose body is marked with the async modifier.异步函数的返回是Future
+函数的想等性：作为对象，函数也可以做想等比较，top-level和class函数永远是相等的，但是Instance函数的相等必须是同一个instance的函数才ok  
 
 ### [Lexical scope](https://dart.dev/guides/language/language-tour#lexical-scope)
-在Dart中，词法的作用范围取决于layout of the code。并且严格遵循先定义后使用的规则
+在Dart中，词法的作用范围取决于layout of the code。  
+简单说就是取决于大括号的范围，在大括号定义的变量的作用范围就是当前大括号，或者内部嵌套的括号，函数等。
+并且严格遵循先定义后使用的规则。
 
 ### [Lexical closures（词法闭包)](https://dart.dev/guides/language/language-tour#lexical-closures)
-A closure is a function object that has access to variables in its lexical scope, even when the function is used outside of its original scope.  
-所以闭包在Dart里面只是针对函数的。
+官方的定义：A closure is a function object that has access to variables in its lexical scope, even when the function is used outside of its original scope.  
+所以闭包在Dart里面只是针对函数对象，并且是这个对象引用了lexical scope内的其他数据。
+闭包可以理解为函数把一个变量捕获到函数内部，从而可以跟随函数被传递。类似一个对象的一个字段被赋值。
+
 ### [Operators操作符](https://dart.dev/guides/language/language-tour#operators)
 操作符有很多种，包含单目的，双目的等等，一部分是[可以重写的操作符](https://dart.dev/guides/language/language-tour#overridable-operators)  
 ==操作符定义在Object中，默认实现是测定两个对象是不是同一个，当然这个操作符可以被重写，同时应该重写hashcode method.  
