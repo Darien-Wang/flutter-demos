@@ -1,18 +1,27 @@
-bool topLevel = true;
-
+//说明一个普通的函数的闭包能力
 void main() {
-  var insideMain = true;
+  var a = Widget("aaa");
+  var p = Person();
+  p.voidCallback = a.printName;
 
-  void myFunction() {
-    var insideFunction = true;
+  p.voidCallback();
 
-    void nestedFunction() {
-      var insideNestedFunction = true;
+  a.name = "bbb";
+  p.voidCallback();
+}
 
-      assert(topLevel);
-      assert(insideMain);
-      assert(insideFunction);
-      assert(insideNestedFunction);
-    }
+typedef VoidCallback = void Function();
+
+class Widget {
+  String name;
+
+  Widget(this.name);
+
+  void printName() {
+    print(name);
   }
+}
+
+class Person {
+  VoidCallback voidCallback;
 }

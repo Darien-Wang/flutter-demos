@@ -237,7 +237,7 @@ class ClassDemoImpl implements ClassDemo {
 ### [枚举](https://dart.dev/guides/language/language-tour#enumerated-types)
 special kind of class used to represent a fixed number of constant values.  
 不同于java，Dart的枚举无法使用带有参数的构造函数，无法定义method  
-枚举不能被集成，不能被mixin，
+枚举不能被继承，不能被mixin，
 
 ### [Mixin语法](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins)
 mixin用于向class添加feature，它提供了介于extend和implements的一种实现  
@@ -246,17 +246,12 @@ mixin用于向class添加feature，它提供了介于extend和implements的一�
 在minxin中，对当前类使用is Type语法，返回对是true。这一点和接口类似。  
 当我们想要在不共享相同类层次结构的多个类之间共享行为时，或者在超类中实现此类行为没有意义时，Mixins非常有用。比如Flutter中的RenderSliverHelpers  
 还可以使用语法：mixin name on classname 来指定可以使用这个mixin的类必须是on后面的类的子类.使用mixin声明的类不能被实例化。  
-mixin语法还在发展，后续应该会有增强和完善。  
-
-### [Class variables and methods](https://dart.dev/guides/language/language-tour#class-variables-and-methods)
-在Dart里面，variables和methods可以是top_level，class_level，instance_level  
-class内部使用static修饰的variable和methods属于class层面的，不能通过类的instance来访问，直接使用类名来访问，当需要class-wide state and constants的时候这非常有用，否则应该使用top-level variable & methods  
-官方对于怎么使用的建议是:Note: Consider using top-level functions, instead of static methods, for common or widely used utilities and functionality.  
+mixin语法还在发展，后续应该会有增强和完善。   
 
 ### [泛型](https://dart.dev/guides/language/language-tour#generics)
 Dart支持真泛型，也就是泛型的信息是带入运行时的  
 Dart针对泛型的restrict约束，只能使用extends（表示接受特定类型及其子类的类型作为泛型约束），不能使用super  
-泛型针对class和method，由于泛型在Dart带入运行时，泛型可以直接用于一个变量的所有操作（没有约束的泛型只能使用Object的方法，但是可以使用as来转成对应的类型来操作）
+泛型针对class和instance method，由于泛型在Dart带入运行时，泛型可以直接用于一个变量的所有操作（没有约束的泛型只能使用Object的方法，但是可以使用as来转成对应的类型来操作）
 泛型method不可以脱离泛型类，也就是只能在泛型类内定义泛型method,泛型方法。泛型方法不能是static的。  
 ```
 class GenericDemo<T extends num> {
@@ -412,7 +407,7 @@ void childIsolateEntryPoint(SendPort mainIsolateSp)  {
 
 
 ### 详细的官方资料
-这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Java](https://dart.dev/guides/language/effective-dart)
+这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Dart](https://dart.dev/guides/language/effective-dart)
 
 另外这里有[flutter官方github](https://github.com/flutter),可以看到很多官方的团队的风格。
 
