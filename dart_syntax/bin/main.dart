@@ -5,7 +5,6 @@ void main() {
   p.voidCallback = a.printName;
 
   p.voidCallback();
-
   a.name = "bbb";
   p.voidCallback();
 }

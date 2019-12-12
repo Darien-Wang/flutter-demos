@@ -237,7 +237,8 @@ class ClassDemoImpl implements ClassDemo {
 ### [枚举](https://dart.dev/guides/language/language-tour#enumerated-types)
 special kind of class used to represent a fixed number of constant values.  
 不同于java，Dart的枚举无法使用带有参数的构造函数，无法定义method  
-枚举不能被继承，不能被mixin，
+枚举不能被继承，不能被mixin，不能被implement
+枚举可以用于switch语法，这种情况下，编译器要求你覆盖所有当枚举情况，否则给出警告。
 
 ### [Mixin语法](https://dart.dev/guides/language/language-tour#adding-features-to-a-class-mixins)
 mixin用于向class添加feature，它提供了介于extend和implements的一种实现  
