@@ -35,7 +35,7 @@ void main() {
 
   var theIndex = 5;
 
-  if (false) {
+  if (true) {
     //这里是倒计时的一种函数传递参数被闭包的写法
     tick(ticks: theIndex).listen((int number) {
       print("当前number = $number");

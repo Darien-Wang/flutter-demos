@@ -19,7 +19,7 @@ main() async {
 
   //通过fromIterable获取stream
   await for (var entity in Stream.fromIterable([1, 2, 3, 4])) {
-    print('iterable entity = entituy');
+    print('iterable entity = $entity');
   }
 
   //下面的对象，对于一个工厂构造方法，却提供了const支持，一般在使用的情况
@@ -37,12 +37,12 @@ main() async {
     print('const Stream.empty onDone 2');
   });
 
-  //下面展示periodic的用法，相对独特的一个用法
-  await Stream.periodic(Duration(milliseconds: 100), (int computationCount) {
-    return "这里是数字:$computationCount";
-  }).forEach((it) {
-    print(it);
-  });
+//  //下面展示periodic的用法，相对独特的一个用法
+//  await Stream.periodic(Duration(milliseconds: 100), (int computationCount) {
+//    return "这里是数字:$computationCount";
+//  }).forEach((it) {
+//    print(it);
+//  });
 
   Stream.fromIterable(["hello", "world"])
       .transform(DuplicationTransformer())

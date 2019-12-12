@@ -7,7 +7,6 @@
     error = Instance of 'Error'
     执行了run 参数a = 99
 
-
     onError中如果不执行返回，则a = null；
  */
 

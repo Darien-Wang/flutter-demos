@@ -60,11 +60,9 @@ Stream<int> getNumbers2() {
 }
 
 Stream<int> getNumbers() async* {
-  var i = 0;
-  while (i < 10) {
-    if (i == 5 || i == 3) {
-      throw Exception("在source stream抛出异常,这时候i = $i");
-    }
-    yield i++;
-  }
+  yield 90;
+  yield 91;
+  yield 92;
+  throw "nimei"; //抛异常之后，无法继续执行，所以async generator function无法模拟一次cancelOnError。
+  yield* getNumbers2();
 }
