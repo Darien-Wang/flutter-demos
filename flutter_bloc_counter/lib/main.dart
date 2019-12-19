@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc_counter/page/HomePage.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_counter/page/HomePage.dart';
 
 import 'bloc/CounterBloc.dart';
 
@@ -34,26 +34,26 @@ void main() {
 
 class MyApp extends StatelessWidget {
 //  //写法一：问题是在于，由于BlocProvider是依赖WidgetTree的，那么作为Homepage的tree的顶端，无法传递到通过路由打开的新页面
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Flutter Demo',
-//      home: BlocProvider<CounterBloc>(
-//        builder: (context) => CounterBloc(),
-//        child: HomePage(),
-//      ),
-//    );
-//  }
-
-  //写法二：对比写法一，提高了BlocProvider层级在MaterialApp上面，从而该BlocProvider成为了一个全局的Provider
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterBloc>(
-      create: (context) => CounterBloc(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        home: HomePage(),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: BlocProvider<CounterBloc>(
+        builder: (context) => CounterBloc(),
+        child: HomePage(),
       ),
     );
   }
+
+//  //写法二：对比写法一，提高了BlocProvider层级在MaterialApp上面，从而该BlocProvider成为了一个全局的Provider
+//  @override
+//  Widget build(BuildContext context) {
+//    return BlocProvider<CounterBloc>(
+//      create: (_) => CounterBloc(),
+//      child: MaterialApp(
+//        title: 'Flutter Demo',
+//        home: HomePage(),
+//      ),
+//    );
+//  }
 }

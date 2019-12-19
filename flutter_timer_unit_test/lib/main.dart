@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_timer/bloc/bloc.dart';
 import 'package:flutter_timer/ticker.dart';
-import 'package:wave/wave.dart';
 import 'package:wave/config.dart';
+import 'package:wave/wave.dart';
 
 void main() => runApp(MyApp());
 
@@ -80,23 +80,21 @@ class Actions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: _mapStateToActionButtons(
-        timerBloc: BlocProvider.of<TimerBloc>(context),
-      ),
-    );
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: _mapStateToActionButtons(context));
   }
 
-  List<Widget> _mapStateToActionButtons({
-    TimerBloc timerBloc,
-  }) {
-    final TimerState currentState = timerBloc.state;
+  List<Widget> _mapStateToActionButtons(BuildContext context) {
+    final TimerState currentState = BlocProvider
+        .of<TimerBloc>(context)
+        .state;
     if (currentState is Ready) {
       return [
         FloatingActionButton(
           child: Icon(Icons.play_arrow),
           onPressed: () =>
-              timerBloc.add(Start(duration: currentState.duration)),
+              BlocProvider.of<TimerBloc>(context)
+                  .add(Start(duration: currentState.duration)),
         ),
       ];
     }
@@ -104,11 +102,11 @@ class Actions extends StatelessWidget {
       return [
         FloatingActionButton(
           child: Icon(Icons.pause),
-          onPressed: () => timerBloc.add(Pause()),
+          onPressed: () => BlocProvider.of<TimerBloc>(context).add(Pause()),
         ),
         FloatingActionButton(
           child: Icon(Icons.replay),
-          onPressed: () => timerBloc.add(Reset()),
+          onPressed: () => BlocProvider.of<TimerBloc>(context).add(Reset()),
         ),
       ];
     }
@@ -116,11 +114,11 @@ class Actions extends StatelessWidget {
       return [
         FloatingActionButton(
           child: Icon(Icons.play_arrow),
-          onPressed: () => timerBloc.add(Resume()),
+          onPressed: () => BlocProvider.of<TimerBloc>(context).add(Resume()),
         ),
         FloatingActionButton(
           child: Icon(Icons.replay),
-          onPressed: () => timerBloc.add(Reset()),
+          onPressed: () => BlocProvider.of<TimerBloc>(context).add(Reset()),
         ),
       ];
     }
@@ -128,11 +126,19 @@ class Actions extends StatelessWidget {
       return [
         FloatingActionButton(
           child: Icon(Icons.replay),
-          onPressed: () => timerBloc.add(Reset()),
+          onPressed: () => BlocProvider.of<TimerBloc>(context).add(Reset()),
         ),
       ];
     }
     return [];
+  }
+}
+
+class ButtonsWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
   }
 }
 

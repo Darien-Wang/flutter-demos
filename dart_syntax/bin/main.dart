@@ -8,10 +8,6 @@ void main() {
   print(1 is dynamic);
   print(1 is Object);
   print(1 is Null);
-
-  A
-      .name()
-      .name;
 }
 
 class AFather {
