@@ -17,7 +17,6 @@ class BatteryLevelViewController {
    }
 
    void bindNativeMethodCallBackHandler() {
-   
       _battery_view_channel.setMethodCallHandler(this._handler);
    }
 

@@ -12,7 +12,3 @@
 - (instancetype)initWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar;
 
 @end
-
-
-
-

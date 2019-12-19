@@ -1,15 +1,18 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_plugin/flutter_plugin.dart';
 
-void main() => runApp(MyApp());
+void main() {
+//  debugPaintSizeEnabled = true;
+//  timeDilation = 50;
+  runApp(MyApp());
+}
 
 //Constants:
-
 
 class MyApp extends StatefulWidget {
   @override
@@ -160,7 +163,6 @@ class _MyAppState extends State<MyApp> {
         )
       ],
     );
-
   }
 
   @override
