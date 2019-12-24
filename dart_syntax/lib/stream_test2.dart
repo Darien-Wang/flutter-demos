@@ -39,11 +39,11 @@ main() async {
   numController.add(-5);
   await numController.close(); //close之后，触发onDone操作
 //  numController.add(-1);//close之后，触发Bad state: Cannot add event after closing异常
-  //注意，close本身不会取消流的订阅，如果是非广播流，再次订阅触发异常Bad state: Stream has already been listened to.
-  //但是针对广播流，虽然在close之后继续添加订阅不会触发异常，但是因为流已经关闭，无法发送事件，这个订阅没有任何意义。
-  numController.stream.listen((entity) {
-    print('新订阅流的事件：entity = $entity');
-  });
+//  //注意，close本身不会取消流的订阅，如果是非广播流，再次订阅触发异常Bad state: Stream has already been listened to.
+//  //但是针对广播流，虽然在close之后继续添加订阅不会触发异常，但是因为流已经关闭，无法发送事件，这个订阅没有任何意义。
+//  numController.stream.listen((entity) {
+//    print('新订阅流的事件：entity = $entity');
+//  });
 }
 
 Stream<int> getNumbers2() {
@@ -52,6 +52,7 @@ Stream<int> getNumbers2() {
       -100); //这里说一个细节，这没有调用.sink来添加，但是根据源码，sink只是暴露了sink接口，真是的添加操作，仍然使用的streamcontroll来进行
   otherNumController.addError("在getNumbers第一次抛出异常");
   otherNumController.add(-200);
+
   otherNumController.addError("在getNumbers第二次抛出异常");
 
 //  otherNumController.close();
@@ -64,5 +65,5 @@ Stream<int> getNumbers() async* {
   yield 91;
   yield 92;
   throw "nimei"; //抛异常之后，无法继续执行，所以async generator function无法模拟一次cancelOnError。
-  yield* getNumbers2();
+//  yield 93;
 }

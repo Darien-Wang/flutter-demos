@@ -14,15 +14,14 @@
  */
 void main() {
   walk(1)
-      .then((value) => 1, onError: (error) {
-    print(error);
-    throw Exception("error happens");
-  })
+      .then((value) {
+    print('获取到value了 value = $value');
+    throw Exception("exception throw in walk");
+  }, onError: (e) {})
       .catchError((error) => print('catch le = $error'))
       .whenComplete(() => print("Done!!!")); //类似try catch finally的写法
 }
 
 Future<int> walk(int a) async {
   print('执行了walk');
-  throw Exception("exception throw in walk");
 }

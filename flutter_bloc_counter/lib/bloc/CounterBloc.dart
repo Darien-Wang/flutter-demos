@@ -38,4 +38,3 @@ enum CounterEvent {
   increment,
   decrement,
 }
-

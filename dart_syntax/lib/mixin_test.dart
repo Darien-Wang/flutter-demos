@@ -1,6 +1,8 @@
 //The special, required, top-level function where app execution starts.
 import 'dart:async';
 
+import 'dart:convert';
+
 main(List<String> arguments) {
   var xx = XX();
   xx.walk();
@@ -36,11 +38,20 @@ mixin D on A {
 }
 
 //extends with implements是顺序是固定的
-//
+@Todo("Bob", "fjdls")
 class XX extends A with B, D implements C {
   @override
   void walk() {
     super.walk();
     print('XX walk');
   }
+
+  void sleep() {}
+}
+
+class Todo {
+  final String who;
+  final String what;
+
+  const Todo(this.who, this.what);
 }

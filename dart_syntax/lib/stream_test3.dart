@@ -37,12 +37,12 @@ main() async {
     print('const Stream.empty onDone 2');
   });
 
-//  //下面展示periodic的用法，相对独特的一个用法
-//  await Stream.periodic(Duration(milliseconds: 100), (int computationCount) {
-//    return "这里是数字:$computationCount";
-//  }).forEach((it) {
-//    print(it);
-//  });
+  //下面展示periodic的用法，相对独特的一个用法
+  await Stream.periodic(Duration(milliseconds: 100), (int computationCount) {
+    return "这里是数字:$computationCount";
+  }).take(10).forEach((it) {
+    print(it);
+  });
 
   Stream.fromIterable(["hello", "world"])
       .transform(DuplicationTransformer())

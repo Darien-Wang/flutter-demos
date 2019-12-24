@@ -14,8 +14,7 @@ main(List<String> arguments) {
   x = 'Bob';
   print(x);
   print(x.length);
-  print(x
-      .size); //这个在编译期不会报错，this cause runtime error:Unhandled exception:NoSuchMethodError: Class 'String' has no instance getter 'size'.
+//  print(x.jjjjjjjjjjjjjjdsljjhsidfsdf); //这个在编译期不会报错，this cause runtime error:Unhandled exception:NoSuchMethodError: Class 'String' has no instance getter 'size'.
   print('===============================');
 
   //Object
