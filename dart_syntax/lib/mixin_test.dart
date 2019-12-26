@@ -22,6 +22,7 @@ abstract class A {
   }
 }
 
+//on语法，可以指定多个类，中间用逗号分隔
 mixin B on A {
   void walk() {
     super.walk();
