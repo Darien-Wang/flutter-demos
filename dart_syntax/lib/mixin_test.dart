@@ -1,7 +1,5 @@
 //The special, required, top-level function where app execution starts.
-import 'dart:async';
-
-import 'dart:convert';
+import 'package:meta/meta.dart';
 
 main(List<String> arguments) {
   var xx = XX();
@@ -10,36 +8,50 @@ main(List<String> arguments) {
   print(xx is B);
   print(xx is C);
   print(xx is D);
+  print((xx as D) is C);
+  C c = xx as C;
+  print(c is D);
+  print((xx as E) is D);
 }
 
-class A {
+abstract class A {
+  @protected
+  @mustCallSuper
   void walk() {
     print('A walk');
   }
 }
 
-mixin B {
+mixin B on A {
   void walk() {
+    super.walk();
     print('B walk');
   }
 }
 
-class C {
+mixin C on A {
   void walk() {
+    super.walk();
     print('C walk');
   }
 }
 
-//嘿嘿，添加了另外一个
 mixin D on A {
   void walk() {
+    super.walk();
     print('D walk');
+  }
+}
+
+class E {
+  void walk() {
+    print('E walk');
   }
 }
 
 //extends with implements是顺序是固定的
 @Todo("Bob", "fjdls")
-class XX extends A with B, D implements C {
+class XX extends A with B, C, D implements E {
   @override
   void walk() {
     super.walk();
