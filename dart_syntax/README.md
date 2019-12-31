@@ -406,6 +406,168 @@ void childIsolateEntryPoint(SendPort mainIsolateSp)  {
 反射在Flutter中是禁止的，并且在官方目前是实验性质的，官方对应的核心库是mirror库，可以参考[核心库预览](https://api.dart.dev/stable/2.6.1/dart-mirrors/dart-mirrors-library.html)  
 反射的语法仍然是不稳定的，并且目前只是针对Dart VM & dart2js,所以感兴趣的私下了解。
 
+- Dart反射的思路和java是一致的，都是对语言进行了某种程度的建模和解析。
+- 整个反射的核心建立在各种Mirror类上，属于dart:mirrors库
+- 反射的核心是三个方法：分别反射的是instane，Class和Type
+```
+external InstanceMirror reflect(Object reflectee);
+external ClassMirror reflectClass(Type key);
+external TypeMirror reflectType(Type key, [List<Type> typeArguments]);
+```
+
+
+- A [TypeMirror] reflects a Dart language class, typedef, function type or type variable.类声明：abstract class TypeMirror implements DeclarationMirror
+- A [ClassMirror] reflects a Dart language class.类声明：abstract class ClassMirror implements TypeMirror, ObjectMirror
+- An [ObjectMirror] is a common superinterface of [InstanceMirror],[ClassMirror], and [LibraryMirror] that represents their shared functionality.类声明：abstract class ObjectMirror implements Mirror
+- An [InstanceMirror] reflects an instance of a Dart language object.  类声明：abstract class InstanceMirror implements ObjectMirror 
+
+下面的代码使用反射获取了InstanceMirror,触发了A的构造函数
+```
+import 'dart:mirrors';
+class A{
+  int a;
+  A(this.a){
+    print(a);
+  }
+}
+main(){
+  ClassMirror classMirror = reflectClass(A);   
+  classMirror.newInstance(Symbol.empty ,[1]); //调用构造方法，打印1
+}
+```
+
+
+- 元数据对象获取：通过ClassMirror对象获取metadata(类型是：List<InstanceMirror>)，然后遍历依次调用reflectee(反思者)
+```
+import 'dart:mirrors';
+@Todo('我', '干活')
+class A{
+  int a;
+  A(this.a){
+    print(a);
+  }
+}
+
+class Todo {
+  final String who;
+  final String what;
+  const Todo(this.who, this.what);
+}
+
+main(){
+  ClassMirror classMirror = reflectClass(A);
+  // 获取 class 上的元数据
+  classMirror.metadata.forEach((metadata) {
+    print(metadata.reflectee.who + ' ==> ' + metadata.reflectee.what);
+  });
+}
+```
+
+下面的代码把一个类的结构进行了反射打印：
+```
+import 'dart:mirrors';
+
+typedef F<T, E> = int Function({E b, T a});
+
+class A<T> {
+  Map<String,int> a;
+  static int b;
+  static F<int, String> a2;
+}
+
+main(List<String> args) {
+  getAnnotation();
+}
+
+void getAnnotation() {
+  ClassMirror classMirror = reflectClass(A);
+  classMirror.declarations.forEach((Symbol key, DeclarationMirror value) {
+    //获取属性a和a2的反射
+    if (value is VariableMirror) {
+      //获取属性的类型
+      var type = value.type;
+      print("${type.reflectedType} , isStatic = ${value.isStatic}");
+      //函数类型反射
+      if (type is FunctionTypeMirror) {
+        print(type.returnType);
+        type.parameters.forEach((value) {
+          if (value is ClassMirror) {
+            print(value);
+          } else if (value is ParameterMirror) {
+            print(value.simpleName);
+          }
+        });
+      }
+      type.typeVariables.forEach((value) => print("哈哈哈$value"));
+      type.typeArguments.forEach((value) => print("嘿嘿嘿$value"));
+    }
+  });
+}
+```
+
+下面的代码重点介绍了注解的反射；
+```
+import 'dart:mirrors';
+
+@Todo('todo1', 'A')
+class A{
+  @Todo('todo2', 'a')
+  int a;
+  A(this.a){
+    print(a);
+  }
+  @Todo('todo3', 'doA')
+  doA(@Todo('todo4', 'x')int x){}
+}
+
+class Todo {
+  final String who;
+  final String what;
+  const Todo(this.who, this.what);
+}
+
+main(List<String> args) {
+  getAnnotation();
+}
+
+void getAnnotation() {
+  ClassMirror classMirror = reflectClass(A);
+
+  // 1.获取 class 上的元数据
+  classMirror.metadata.forEach((metadata) {
+    //因为示例就一个元数据，后续就省略判断了
+    if (metadata.reflectee is Todo) {
+      print(metadata.reflectee.who + ' ==> ' + metadata.reflectee.what);
+    }
+  });
+
+  //declarations,获取A类所有的方法和属性（没有继承）
+  classMirror.declarations.forEach((Symbol key, DeclarationMirror value) {
+    //属性是VariableMirror
+    if(value is VariableMirror){
+      // 2.属性上的元数据
+      value.metadata.forEach((metadata) {
+        print(metadata.reflectee.who + ' ==> ' + metadata.reflectee.what);
+      });
+    }
+
+    if (value is MethodMirror) {
+      // 3.方法上的元数据
+      value.metadata.forEach((metadata) {
+        print(metadata.reflectee.who + ' ==> ' + metadata.reflectee.what);
+      });
+      // 方法里的参数列表
+      value.parameters.forEach((param) {
+        //4.方法里参数的元数据
+        param.metadata.forEach((metadata) {
+          print(metadata.reflectee.who + ' ==> ' + metadata.reflectee.what);
+        });
+      });
+    }
+  });
+}
+```
+
 
 ### 详细的官方资料
 这篇文档，是结合官方的[Dart tour](https://dart.dev/guides/language/language-tour)进行了补充，更专业的资料请查看[Dart language specification](https://dart.dev/guides/language/spec),和[Effective Dart](https://dart.dev/guides/language/effective-dart)

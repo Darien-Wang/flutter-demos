@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test/flutter_test.dart' as prefix0;
 import 'package:flutter_timer/bloc/bloc.dart';
 import 'package:flutter_timer/ticker.dart';
 
@@ -16,10 +15,10 @@ void main() {
     try {
       TimerBloc(ticker: null);
     } catch (e) {
-      expect(e, prefix0.isAssertionError);
+      expect(e is AssertionError, true);
+      expect(e, isAssertionError);
     }
   });
-
 
   test("event ==", () {
     expect(Start(duration: 60) == Start(duration: 60), true);
