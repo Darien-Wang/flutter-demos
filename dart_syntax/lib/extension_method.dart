@@ -8,13 +8,13 @@ extension NumberParsing on String {
 
 extension FancyList<T> on List<T> {
   List<T> get evenElements {
-    return <T>[for (int i = 0; i < this.length; i += 2) this[i]];
+    return <T>[for (int i = 0; i < length; i += 2) this[i]];
   }
 }
 
 extension ShiftString on String {
   String operator <<(int shift) {
-    return this.substring(shift, this.length) + this.substring(0, shift);
+    return substring(shift, length) + substring(0, shift);
   }
 }
 
@@ -25,5 +25,5 @@ void main() {
     print(value);
   });
 
-  print("hello" << 2);
+  print('hello' << 2);
 }
