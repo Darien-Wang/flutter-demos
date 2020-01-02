@@ -1,12 +1,18 @@
-main() async {
-  try {
-    await walk();
-  } catch (e) {
-    print(e);
-  }
+class A {
+  final String name;
+
+  const A(this.name);
 }
 
-Future<void> walk() async {
-  print('walk walk');
-  throw "throw in walk";
+main() {
+  var a = A("Bob");
+  a = A("Bob");
+//  var b = A("Bob");
+
+//  print(a == b);
+
+//  const c = A("Bob");
+  const d = A("Bob");
+
+  print(a == d);
 }

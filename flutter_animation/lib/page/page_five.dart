@@ -17,7 +17,7 @@ class PageFiveState extends State<PageFive>
     controller =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
     // #docregion addListener
-    animation = new CurvedAnimation(parent: controller, curve: Curves.easeIn);
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
     // #enddocregion addListener
     controller.repeat(reverse: true);
   }
@@ -25,9 +25,7 @@ class PageFiveState extends State<PageFive>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: AnimatedLogo(),
-      ),
+      body: AnimatedLogo(animation: animation,),
     );
   }
 
@@ -39,23 +37,23 @@ class PageFiveState extends State<PageFive>
 }
 
 class AnimatedLogo extends AnimatedWidget {
-  // The Tweens are static because they don't change.
-  static final _opacityTween = new Tween<double>(begin: 0.1, end: 1.0);
-  static final _sizeTween = new Tween<double>(begin: 0.0, end: 300.0);
+  // Make the Tweens static because they don't change.
+  static final _opacityTween = Tween<double>(begin: 0.1, end: 1);
+  static final _sizeTween = Tween<double>(begin: 0, end: 300);
 
-  AnimatedLogo({Key key, Animation<double> animation})
+  AnimatedLogo({Key key, @required Animation<double> animation})
       : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
-    return new Center(
-      child: new Opacity(
+    final animation = listenable as Animation<double>;
+    return Center(
+      child: Opacity(
         opacity: _opacityTween.evaluate(animation),
-        child: new Container(
-          margin: new EdgeInsets.symmetric(vertical: 10.0),
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
           height: _sizeTween.evaluate(animation),
           width: _sizeTween.evaluate(animation),
-          child: new FlutterLogo(),
+          child: FlutterLogo(),
         ),
       ),
     );

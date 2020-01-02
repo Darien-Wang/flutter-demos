@@ -40,18 +40,18 @@ class PageTwoState extends State<PageTwo> with SingleTickerProviderStateMixin {
 
 //这里把动画的部分继承AnimatedWidget进行封装，传递一个Animation，内部会执行添加监听器和setState
 class AnimatedLogo extends AnimatedWidget {
-  AnimatedLogo({Key key, Animation<double> animation})
+  AnimatedLogo({Key key, @required Animation<double> animation})
       : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
     final Animation<double> animation = listenable;
-    return new Center(
-      child: new Container(
-        margin: new EdgeInsets.symmetric(vertical: 10.0),
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
         height: animation.value,
         width: animation.value,
-        child: new FlutterLogo(),
+        child: FlutterLogo(),
       ),
     );
   }

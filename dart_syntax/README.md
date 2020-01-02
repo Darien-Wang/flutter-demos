@@ -107,6 +107,32 @@ getters和setter是特殊的函数，用于提供read和write的控制，每个i
 Every app must have a top-level main() function, which serves as the entrypoint to the app. The main() function returns void and has an optional List<String> parameter for arguments.  
 async functions: 也就是异步函数，is a function whose body is marked with the async modifier.异步函数的返回是Future
 函数的想等性：作为对象，函数也可以做想等比较，top-level和class函数永远是相等的，但是Instance函数的相等必须是同一个instance的函数才ok  
+- 拓展函数：
+定义语法：
+```
+extension <extension name> on <type> {
+  (<member definition>)*
+}
+
+e.g:
+extension NumberParsing on String {
+  int parseInt() {
+    return int.parse(this);
+  }
+
+  //define this api as package private
+  double _parseDouble() {
+    return double.parse(this);
+  }
+}
+
+Extensions can have generic type parameters. For example, here’s some code that extends the built-in List<T> type with a getter, an operator, and a method:
+extension MyFancyList<T> on List<T> {
+  int get doubleLength => length * 2;
+  List<T> operator -() => reversed.toList();
+  List<List<T>> split(int at) => <List<T>>[sublist(0, at), sublist(at)];
+}
+```
 
 ### [Lexical scope](https://dart.dev/guides/language/language-tour#lexical-scope)
 在Dart中，词法的作用范围取决于layout of the code。  
