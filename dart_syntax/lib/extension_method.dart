@@ -18,9 +18,14 @@ extension ShiftString on String {
   }
 }
 
+extension StandardExtension<T> on T {
+
+}
+
 void main() {
   print('42'.parseInt());
-  var list = [1,2,3];
+  var list = [1, 2, 3];
+  print(list.runtimeType);
   list.evenElements.forEach((value) {
     print(value);
   });

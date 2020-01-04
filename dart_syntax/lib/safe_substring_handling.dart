@@ -4,6 +4,7 @@
 //But if you need to iterate over the characters of a string or to manipulate the contents of a string, you can get into trouble.
 //上面是说在string上做迭代,通常会遇到遇到一些问题,比如:
 // New longer input list:
+import 'dart:core';
 import 'package:characters/characters.dart';
 
 var input = <String>[
