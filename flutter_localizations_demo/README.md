@@ -1,4 +1,4 @@
-# flutter_intl
+# flutter_localizations_demo
 
 A new Flutter project.
 

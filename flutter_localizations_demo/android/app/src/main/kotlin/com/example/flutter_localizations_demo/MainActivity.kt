@@ -1,4 +1,4 @@
-package com.example.flutter_intl
+package com.example.flutter_localizations_demo
 
 import android.os.Bundle
 
