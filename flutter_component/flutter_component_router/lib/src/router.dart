@@ -15,24 +15,6 @@ final Map<String, WidgetBuilder> _routesNotNeedParameters = {
   RouteName.FEATURE_B_PAGE_B: (BuildContext context) => FeatureBPage(),
 };
 
-class ConnectedNavigator {
-  ///@param routeName defined in [RouteName]
-  static Future<T> pushNamed<T extends Object>(BuildContext context,
-      String routeName) {
-    if (_routesNeedParameters.containsKey(routeName)) {
-      throw Exception(
-          "this method used to push route without parameters,route with name: $routeName should use other method in this class");
-    }
-    return Navigator.of(context).pushNamed(routeName);
-  }
-
-  static Future<T> pushFeatureAPageA<T extends Object>(BuildContext context,
-      String arguments) {
-    return Navigator.of(context)
-        .pushNamed(RouteName.FEATURE_A_PAGE_A, arguments: arguments);
-  }
-}
-
 ///route factory to decide what type of route for specific page
 Route routeFactory(RouteSettings settings) {
   Route route;

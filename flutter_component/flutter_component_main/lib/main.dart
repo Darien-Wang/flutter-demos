@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_component_router/flutter_component_router.dart';
+import 'package:flutter_component_router_name/flutter_component_router_name.dart';
 
 void main() => runApp(MyApp());
 
