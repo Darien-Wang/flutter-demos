@@ -19,7 +19,7 @@ class FeatureBPage extends StatelessWidget {
                 child: Text('点击这个页面，向FeatureAPageA页面回传数据'),
                 onPressed: () {
                   //这里展示了向上一个页面的传值，类似于Android的setResult
-                  Navigator.pop(context, "谢谢你的恢复，我是B页面");
+                  Navigator.pop<String>(context, "谢谢你的恢复，我是B页面");
                 },
               ),
             ],

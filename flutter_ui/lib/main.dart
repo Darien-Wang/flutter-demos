@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_ui/page/layout/layout_one.dart';
 import 'package:flutter_ui/page/page_one.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  debugPaintSizeEnabled = true;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -24,13 +31,8 @@ class HomePage extends StatelessWidget {
     return Material(
       child: ListView(
         children: <Widget>[
-          HomeListItem(
-              title: 'Page ONE',
-              onTap: () {
-                Navigator.of(context)
-                    .push(CupertinoPageRoute(builder: (_) => PageOne()));
-                print('宽度 = ${MediaQuery.of(context).size.width}');
-              })
+          HomeListItem(title: 'Page ONE', page: PageOne(),),
+          HomeListItem(title: 'Layout ONE', page: LayoutOne(),),
         ],
       ),
     );
@@ -39,13 +41,13 @@ class HomePage extends StatelessWidget {
 
 class HomeListItem extends StatelessWidget {
   final String title;
-  final GestureTapCallback onTap;
+  final Widget page;
 
-  HomeListItem({@required this.title, @required this.onTap});
+  HomeListItem({@required this.title, @required this.page});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 50,
@@ -59,7 +61,9 @@ class HomeListItem extends StatelessWidget {
           ),
         ),
       ),
-      onTap: onTap,
+      onTap: () {
+        Navigator.of(context).push(CupertinoPageRoute(builder: (_) => page));
+      },
     );
   }
 }
