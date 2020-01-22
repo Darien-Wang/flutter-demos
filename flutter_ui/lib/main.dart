@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_ui/page/layout/layout_one.dart';
+import 'package:flutter_ui/page/layout/single_child_layout.dart';
 import 'package:flutter_ui/page/page_one.dart';
 
 void main(){
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           HomeListItem(title: 'Page ONE', page: PageOne(),),
-          HomeListItem(title: 'Layout ONE', page: LayoutOne(),),
+          HomeListItem(title: 'Layout ONE', page: SingleChildLayout(),),
         ],
       ),
     );
