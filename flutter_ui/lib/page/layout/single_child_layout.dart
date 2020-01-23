@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class SingleChildLayout extends StatelessWidget {
   @override
@@ -157,15 +158,16 @@ class SingleChildLayout extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-//            Transform(
-//              alignment: Alignment.topRight,
-//              transform: Matrix4.skewY(0.3)..rotateZ(math.pi / 12.0),
-//              child: Container(
-//                padding: const EdgeInsets.all(8.0),
-//                color: const Color(0xFFE8581C),
-//                child: const Text('Apartment for rent!'),
-//              ),
-//            ),
+            Transform(
+              alignment: Alignment.topRight,
+              origin: Offset(30,30),
+              transform: Matrix4.skewY(0)..rotateZ(0),
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                color: const Color(0xFFE8581C),
+                child: const Text('Apartment for rent!'),
+              ),
+            ),
             //这个还是不太懂啊
             FittedBox(
               fit: BoxFit.fitHeight,
