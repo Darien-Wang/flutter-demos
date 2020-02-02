@@ -1,8 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_ui/page/layout/gridview_layout_builder.dart';
+import 'package:flutter_ui/page/layout/gridview_layout_count.dart';
+import 'package:flutter_ui/page/layout/gridview_layout_custom.dart';
+import 'package:flutter_ui/page/layout/gridview_layout_extent.dart';
 import 'package:flutter_ui/page/layout/layout_flow.dart';
 import 'package:flutter_ui/page/layout/layout_flow_animation.dart';
 import 'package:flutter_ui/page/layout/single_child_layout.dart';
@@ -36,7 +38,11 @@ class HomePage extends StatelessWidget {
           HomeListItem(title: 'Page ONE', page: PageOne(),),
           HomeListItem(title: 'Layout SingleChild', page: SingleChildLayout(),),
           HomeListItem(title: 'Layout Flow Animation', page: LayoutFlowAnimation(),),
-          HomeListItem(title: 'Flow Layout', page: LayoutFlow(),),
+          HomeListItem(title: 'Flow Layout', page: FlowLayout(),),
+          HomeListItem(title: 'GridView Layout Count', page: GridViewCount(),),
+          HomeListItem(title: 'GridView Layout Builder', page: GridViewBuilder(),),
+          HomeListItem(title: 'GridView Layout Custom', page: GridViewCustom(),),
+          HomeListItem(title: 'GridView Layout Extent', page: GridViewExtent(),),
         ],
       ),
     );

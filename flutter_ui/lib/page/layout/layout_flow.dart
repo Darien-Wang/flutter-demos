@@ -1,7 +1,7 @@
 //演示流式布局
 import 'package:flutter/material.dart';
 
-class LayoutFlow extends StatelessWidget {
+class FlowLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
