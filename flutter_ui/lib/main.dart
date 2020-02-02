@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_ui/page/layout/layout_flow.dart';
+import 'package:flutter_ui/page/layout/layout_flow_animation.dart';
 import 'package:flutter_ui/page/layout/single_child_layout.dart';
 import 'package:flutter_ui/page/page_one.dart';
 
 void main(){
-  debugPaintSizeEnabled = true;
+//  debugPaintSizeEnabled = true;
   runApp(MyApp());
 }
 
@@ -34,7 +35,8 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           HomeListItem(title: 'Page ONE', page: PageOne(),),
           HomeListItem(title: 'Layout SingleChild', page: SingleChildLayout(),),
-          HomeListItem(title: 'Layout Flow', page: LayoutFlow(),),
+          HomeListItem(title: 'Layout Flow Animation', page: LayoutFlowAnimation(),),
+          HomeListItem(title: 'Flow Layout', page: LayoutFlow(),),
         ],
       ),
     );

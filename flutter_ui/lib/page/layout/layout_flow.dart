@@ -9,100 +9,75 @@ class LayoutFlow extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Flow Example'),
         ),
-        body: FlowMenu(),
+        body: FlowLayoutPage(),
       ),
     );
   }
 }
 
-class FlowMenu extends StatefulWidget {
-  @override
-  _FlowMenuState createState() => _FlowMenuState();
-}
-
-class _FlowMenuState extends State<FlowMenu> with SingleTickerProviderStateMixin {
-  AnimationController menuAnimation;
-  IconData lastTapped = Icons.notifications;
-  final List<IconData> menuItems = <IconData>[
-    Icons.home,
-    Icons.new_releases,
-    Icons.notifications,
-    Icons.settings,
-    Icons.menu,
-  ];
-
-  void _updateMenu(IconData icon) {
-    if (icon != Icons.menu)
-      setState(() => lastTapped = icon);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    menuAnimation = AnimationController(
-      duration: const Duration(milliseconds: 250),
-      vsync: this,
-    );
-  }
-
-  Widget flowMenuItem(IconData icon) {
-    final double buttonDiameter = MediaQuery.of(context).size.width / menuItems.length;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: RawMaterialButton(
-        fillColor: lastTapped == icon ? Colors.amber[700] : Colors.blue,
-        splashColor: Colors.amber[100],
-        shape: CircleBorder(),
-        constraints: BoxConstraints.tight(Size(buttonDiameter, buttonDiameter)),
-        onPressed: () {
-          _updateMenu(icon);
-          menuAnimation.status == AnimationStatus.completed
-              ? menuAnimation.reverse()
-              : menuAnimation.forward();
-        },
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 45.0,
-        ),
-      ),
-    );
-  }
-
+class FlowLayoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Flow(
-        delegate: FlowMenuDelegate(menuAnimation: menuAnimation),
-        children: menuItems.map<Widget>((IconData icon) => flowMenuItem(icon)).toList(),
-      ),
+    return Flow(
+      delegate: FlowLayoutDelegate(context),
+      children: <Widget>[
+        Text('我爱北京天安门我爱北京天安门我爱北京天安门我爱北京天安门我爱北京天安门😁'),
+        Text('天行健，君子以自强不息'),
+        Text('Hello,World',style: TextStyle(fontSize: 30),),
+        Text('哈哈哈😂'),
+        Text('Nice to meet you.',style: TextStyle(fontSize: 25),),
+        Text('水光潋滟晴方好，山色空蒙雨亦奇！！！',style: TextStyle(fontSize: 20),),
+        Text('我爱北京天安门'),
+        Text('Hello,World',style: TextStyle(fontSize: 30),),
+        Padding(
+          padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
+            child: Text('天行健，君子以自强不息')),
+        Text('哈哈哈😂'),
+        Text('Nice to meet you'),
+        Text('拜拜了啊，嘿嘿嘿'),
+      ],
     );
   }
 }
 
-class FlowMenuDelegate extends FlowDelegate {
-  FlowMenuDelegate({this.menuAnimation}) : super(repaint: menuAnimation);
+class FlowLayoutDelegate extends FlowDelegate {
+  BuildContext buildContext;
 
-  final Animation<double> menuAnimation;
+  FlowLayoutDelegate(this.buildContext);
 
-  @override
-  bool shouldRepaint(FlowMenuDelegate oldDelegate) {
-    return menuAnimation != oldDelegate.menuAnimation;
-  }
+  double xTranslation = 0; //执行paintChildren之前的x偏移总量(当前行内,也代表这一行已经使用的x)
+  double yTranslation = 0; //执行paintChildren之前的y偏移总量（整个流布局从顶部开始算）
+  double rowHeightLargest = 0;//记录这一行中，最高的那个元素，当新起一行的时候，刷新yTranslation，并重置为0
 
+  //流布局的核心:当前行x偏移多少，累计y偏移多少
   @override
   void paintChildren(FlowPaintingContext context) {
-    double dx = 0.0;
-    for (int i = 0; i < context.childCount; ++i) {
-      dx = context.getChildSize(i).width * i;
+    double screenWidth = MediaQuery.of(buildContext).size.width;
+    for (int i = 0; i < context.childCount; i++) {
+      //如果当前元素宽度大于这一行剩余的宽度，放在新的一行
+      if (context.getChildSize(i).width > screenWidth - xTranslation) {
+        yTranslation += rowHeightLargest;
+        xTranslation = 0;
+        rowHeightLargest = context.getChildSize(i).height;//新一行第一个元素的高度
+      } else {//当前行内，如果有更高的元素，刷新rowHeightLargest
+        if(rowHeightLargest < context.getChildSize(i).height) {
+          rowHeightLargest = context.getChildSize(i).height;
+        }
+      }
       context.paintChild(
         i,
         transform: Matrix4.translationValues(
-          dx * menuAnimation.value,
-          0,
+          xTranslation,
+          yTranslation,
           0,
         ),
       );
+      xTranslation += context.getChildSize(i).width;
     }
+  }
+
+  @override
+  bool shouldRepaint(FlowDelegate oldDelegate) {
+    return false;
   }
 }
