@@ -3,6 +3,8 @@
 //以下有几个常用的系统内置的delegate：
 ///[SliverGridDelegateWithMaxCrossAxisExtent]maxCrossAxisExtent指定交叉轴最大尺寸，具体的crossAxisCount由屏幕宽度和尺寸和padding来计算
 ///[SliverGridDelegateWithFixedCrossAxisCount]用来指定cross axis的数量
+///GridView默认构造函数可以类比于ListView默认构造函数，适用于有限个数子元素的场景，因为GridView组件会一次性全部渲染children中的子元素组件；
+///GridView.builder构造函数可以类比于ListView.builder构造函数，适用于长列表的场景，因为GridView组件会根据子元素是否出现在屏幕内而动态创建销毁，减少内存消耗，更高效渲染；
 
 import 'package:flutter/material.dart';
 

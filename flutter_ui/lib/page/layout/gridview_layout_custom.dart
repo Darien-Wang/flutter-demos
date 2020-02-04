@@ -1,6 +1,8 @@
 //演示gridview.custom
 //custom要求必须指定delegate和childrenDelegate
-//看起来这个的构造
+///GridView.custom相对于默认构造函数可以自己指定[SliverChildDelegate],这有两个子类，如果使用[SliverChildBuilderDelegate]，其实就是GridView.builder的语法糖，也就是懒加载
+///其实GridView的默认构造函数之所以不能懒加载，就是因为使用了[SliverChildListDelegate],这个类接收List<Widget>，所以要求widget都是构造完成的
+///类似的，使用count和extent也是不能懒加载的
 
 import 'package:flutter/material.dart';
 

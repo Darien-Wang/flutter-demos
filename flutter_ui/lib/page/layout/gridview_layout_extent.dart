@@ -1,5 +1,6 @@
 //演示gridview.count用法
 //extent不同于count的是，count指定cross axis的count，但是extent只是指定cross axis的item的width,然后结合padding和屏幕宽度计算cross axis有多少item
+//GridView.extent构造函数式GridView使用SliverGridDelegateWithMaxCrossAxisExtent的简写（语法糖），效果完全一致。
 
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,6 @@
 //演示gridview.count用法
 //count写法只能绘制固定数量的widgets
+//GridView.count构造函数是GrdiView使用SliverGridDelegateWithFixedCrossAxisCount的简写（语法糖），效果完全一致；
 
 import 'package:flutter/material.dart';
 
